@@ -10,8 +10,11 @@ public class Weapon : MonoBehaviour
     public float speed;
     public int count;
     public int penetrate;
-
-
+    float timer;
+    private void Start()
+    {
+        Init();
+    }
 
     private void Update()
     {
@@ -20,10 +23,64 @@ public class Weapon : MonoBehaviour
             case 0:
                 AutoRotate();
                 break;
+            case 1:
+                timer += Time.deltaTime;
+                if(timer > speed)
+                {
+                    timer = 0;
+                    Fire();
+                }
+                break;
         }
         if(Input.GetButtonDown("Jump"))
         {
-            LevelUp();
+            LevelUp(2,1);
+        }
+    }
+
+    void Fire()
+    {
+        //스캐너에 걸린 애너미가 없으면 함수 종료
+        if (!GameManager.instance.player.scanner.target)
+            return;
+        //플레이어 포지션
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        //스캐너에 걸린 애너미 위치 
+        Vector3 targetPos = GameManager.instance.player.scanner.target.position;
+        //플레이어->애너미 벡터 저장후 정규화
+        Vector3 vecDir = targetPos - playerPos;
+        vecDir = vecDir.normalized;
+        //풀 매니저에 새롭게 자식오브젝트로 생성
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        //불렛 오브젝트를 웨폰1 오브젝트의 하위로 이동
+        bullet.parent = GameObject.Find("Weapon 1").transform;
+        //불렛 위치 초기화
+        bullet.position = playerPos;
+        //불렛의 쿼터니온 회전
+        bullet.rotation = Quaternion.FromToRotation(Vector3.up, vecDir);
+        //데미지와 관통력, 발사 방향 지정
+        bullet.GetComponent<Bullet>().Init(damage, count, vecDir);
+
+    }
+    void LevelUp(int damage, int count)
+    {
+        this.damage = damage;
+        this.count += count;
+
+        if (id == 0)
+            Assign();
+    }
+
+    public void Init()
+    {
+        switch (id)
+        {
+            case 0:
+                speed = -200f;
+                Assign();
+                break;
+            case 1:
+                break;
         }
     }
 
@@ -61,22 +118,13 @@ public class Weapon : MonoBehaviour
             bullet.transform.Translate(0, 1.0f, 0f);
 
             //불렛의 초기화 진행
-            bullet.GetComponent<Bullet>().Init(damage, penetrate);
+            bullet.GetComponent<Bullet>().Init(damage, penetrate, Vector3.zero);
         }
 
 
     }
 
-    public void Init()
-    {
-        switch (id)
-        {
-            case 0:
-                speed = 250f;
-                Assign();
-                break;
-        }
-    }
+
 
     //무기 자동회전 함수
     void AutoRotate()
@@ -89,17 +137,5 @@ public class Weapon : MonoBehaviour
                 break;
         }
     }
-
-    void LevelUp()
-    {
-        damage =1;
-        count++;
-
-        if(id == 0)
-        {
-            Assign();
-        }
-    }
-
 
 }

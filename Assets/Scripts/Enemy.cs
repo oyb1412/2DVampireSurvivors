@@ -16,8 +16,10 @@ public class Enemy : MonoBehaviour
     Animator animator;
     SpriteRenderer spriter;
     WaitForFixedUpdate wait;
-    private void Start()
+    Collider2D col;
+    private void Awake()
     {
+        col = GetComponent<Collider2D>();
         spriter = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
@@ -37,9 +39,10 @@ public class Enemy : MonoBehaviour
         nextVec = dirVec.normalized * speed;
 
         // 직접적인 애너미 이동
-        rigid.MovePosition(rigid.position + nextVec * Time.deltaTime);
+        rigid.MovePosition(rigid.position + nextVec * Time.fixedDeltaTime);
         // 애너미가 타겟에게 닿아도 밀려나지 않게 벨로시티 조정
         rigid.velocity = Vector3.zero;
+
     }
 
     //LateUpdate에 애너미 스프라이트의 반전상황과 관련된 코드 작성
@@ -50,7 +53,6 @@ public class Enemy : MonoBehaviour
         if (!isLive) 
             return;
 
-        animator.SetFloat( "Speed",nextVec.magnitude);
         spriter.flipX = nextVec.x > 0 ? false : true;
    
     }
@@ -60,6 +62,12 @@ public class Enemy : MonoBehaviour
         playerRigid = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
         hp = maxHp;
+
+        isLive = true;
+        col.enabled = true;
+        rigid.simulated = true;
+        spriter.sortingOrder = 2;
+        animator.SetBool("Dead", false);
     }
 
 
@@ -68,37 +76,34 @@ public class Enemy : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //불렛과 충돌하지 않았거나 죽어있는 상황이면 함수 종료
-        if (!collision.CompareTag("Bullet") || !isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+        if (!collision.CompareTag("Bullet") || !isLive)
             return;
 
         //애너미의 체력을 불렛의 데미지만큼 감소
         hp -= collision.GetComponent<Bullet>().damage;
 
         //애너미가 피격당할시 넉백 코루틴 호출
-        StartCoroutine(KnockBack());
+        //StartCoroutine(KnockBack());
 
         if (hp > 0)
         {
             animator.SetTrigger("Hit");
         }
-
-        if (hp < 0)
-        {
-            Dead();
-        }
         else
         {
-
+            //col.enabled = false;
+            //rigid.simulated = false;
+            spriter.sortingOrder = 1;
+            isLive = false;
+            animator.SetBool("Dead",true);
         }
+
     }
 
 
     //넉백을 위한 코루틴 함수
     IEnumerator KnockBack()
     {
-        //1프레임 쉬기
-        yield return wait;
-
         //플레이어 포지션 보관
         Vector3 playerPos = GameManager.instance.player.transform.position;
 
@@ -106,13 +111,15 @@ public class Enemy : MonoBehaviour
         Vector3 backVec = transform.position - playerPos;
 
         //리지드에 힘을 가함(정규화 후) ForceMode2D.Impulse는 타격,폭발처럼 순간적인 힘을 나타낼때 사용
-        rigid.AddForce(backVec.normalized * 5f, ForceMode2D.Impulse);
+        rigid.AddForce(backVec.normalized * 1.5f, ForceMode2D.Impulse);
+
+        //1프레임 쉬기
+        yield return wait;
     }
 
 
     void Dead()
     {
-        isLive = false;
         gameObject.SetActive(false);
     }
 }
