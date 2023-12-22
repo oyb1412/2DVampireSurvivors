@@ -1,58 +1,58 @@
 fileFormatVersion: 2
-guid: 1ddc9afd21fec77489b1248d18f31b68
+guid: 3d6be91968cb95546ac95aeff5e52f84
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7293598183456022363
-    second: Apple_0
+      213: -4570538037665054336
+    second: Cherries_0
   - first:
-      213: 3211865404380153573
-    second: Apple_1
+      213: 1192583394799640888
+    second: Cherries_1
   - first:
-      213: 4808522734667448011
-    second: Apple_2
+      213: -711454075617216784
+    second: Cherries_2
   - first:
-      213: -8577097333041121892
-    second: Apple_3
+      213: 5421872390997284277
+    second: Cherries_3
   - first:
-      213: 1419576285154770477
-    second: Apple_4
+      213: 5363950216444597340
+    second: Cherries_4
   - first:
-      213: -7706788487438311687
-    second: Apple_5
+      213: -8821299780031482609
+    second: Cherries_5
   - first:
-      213: 8638710384840876012
-    second: Apple_6
+      213: 1075779407821988168
+    second: Cherries_6
   - first:
-      213: -4689406079702324653
-    second: Apple_7
+      213: 8792570861257488375
+    second: Cherries_7
   - first:
-      213: -4804661220611782958
-    second: Apple_8
+      213: 3052119051097735194
+    second: Cherries_8
   - first:
-      213: 542562350195365616
-    second: Apple_9
+      213: 7538113517902980163
+    second: Cherries_9
   - first:
-      213: 1535906679059638393
-    second: Apple_10
+      213: 3848886781296226410
+    second: Cherries_10
   - first:
-      213: -6207369124864647917
-    second: Apple_11
+      213: 7849828697117728527
+    second: Cherries_11
   - first:
-      213: 7209791866757004406
-    second: Apple_12
+      213: -9198102554489520265
+    second: Cherries_12
   - first:
-      213: -1462588236305530756
-    second: Apple_13
+      213: 3941576138836150160
+    second: Cherries_13
   - first:
-      213: 4023135878370671054
-    second: Apple_14
+      213: 5159470138463433966
+    second: Cherries_14
   - first:
-      213: -337911150936919937
-    second: Apple_15
+      213: -447626866981707952
+    second: Cherries_15
   - first:
-      213: 9139289913481491577
-    second: Apple_16
+      213: -7347827468922994342
+    second: Cherries_16
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -157,11 +157,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Apple_0
+      name: Cherries_0
       rect:
         serializedVersion: 2
         x: 0
@@ -175,14 +188,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8a08d8fa27377c4a953e5166a4e378a
-      internalID: 7293598183456022363
+      spriteID: f4fe1e6333f132a4c8fe6cfceab02597
+      internalID: -4570538037665054336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_1
+      name: Cherries_1
       rect:
         serializedVersion: 2
         x: 32
@@ -196,14 +209,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f02a7fa3ffeb30a4199e0351b4344f8f
-      internalID: 3211865404380153573
+      spriteID: 8b88e096151df024b885fbaa533f6419
+      internalID: 1192583394799640888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_2
+      name: Cherries_2
       rect:
         serializedVersion: 2
         x: 64
@@ -217,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06b3375f0ba8c0142b7aad447dbbbae3
-      internalID: 4808522734667448011
+      spriteID: 906f14158141da745a61b3fbac907963
+      internalID: -711454075617216784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_3
+      name: Cherries_3
       rect:
         serializedVersion: 2
         x: 96
@@ -238,14 +251,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 960f1f000bcb718488f0325a35b894a1
-      internalID: -8577097333041121892
+      spriteID: 1f5201d23c9e32b4d8984b952b63712d
+      internalID: 5421872390997284277
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_4
+      name: Cherries_4
       rect:
         serializedVersion: 2
         x: 128
@@ -259,14 +272,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37de86aa0dcf0a948ae6dd77bbbd73d9
-      internalID: 1419576285154770477
+      spriteID: fdf5081d34ab54d429af517153a2d5ca
+      internalID: 5363950216444597340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_5
+      name: Cherries_5
       rect:
         serializedVersion: 2
         x: 160
@@ -280,14 +293,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37705b0046b0cdb4f8be3391619ab868
-      internalID: -7706788487438311687
+      spriteID: 30b5f7e88093b564fbab32024ff6c538
+      internalID: -8821299780031482609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_6
+      name: Cherries_6
       rect:
         serializedVersion: 2
         x: 192
@@ -301,14 +314,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6944f29b9357660429c0802790c65fcb
-      internalID: 8638710384840876012
+      spriteID: 080b23256625a2443a0a6d57ed4e9e9a
+      internalID: 1075779407821988168
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_7
+      name: Cherries_7
       rect:
         serializedVersion: 2
         x: 224
@@ -322,14 +335,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3606c8283f75c0546bb0e1041976d1d6
-      internalID: -4689406079702324653
+      spriteID: edc235a8610ade94b91df9f90ea4f846
+      internalID: 8792570861257488375
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_8
+      name: Cherries_8
       rect:
         serializedVersion: 2
         x: 256
@@ -343,14 +356,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1addb6c313dfe2f4a99b92c0a7e0b5e6
-      internalID: -4804661220611782958
+      spriteID: 91709365c818266408d23b27fee839fd
+      internalID: 3052119051097735194
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_9
+      name: Cherries_9
       rect:
         serializedVersion: 2
         x: 288
@@ -364,14 +377,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 945871b795429e44886b112764cf3d89
-      internalID: 542562350195365616
+      spriteID: 6d06141bdfa91f04795dfae6e59263c0
+      internalID: 7538113517902980163
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_10
+      name: Cherries_10
       rect:
         serializedVersion: 2
         x: 320
@@ -385,14 +398,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 454305dfe8422c24dbf414b73bb7af7c
-      internalID: 1535906679059638393
+      spriteID: 8a4889852de374c40a2c352441079c9e
+      internalID: 3848886781296226410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_11
+      name: Cherries_11
       rect:
         serializedVersion: 2
         x: 352
@@ -406,14 +419,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dae896e063923c24fa64acad79e2d19b
-      internalID: -6207369124864647917
+      spriteID: f051544de22026347939e51a56050c03
+      internalID: 7849828697117728527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_12
+      name: Cherries_12
       rect:
         serializedVersion: 2
         x: 384
@@ -427,14 +440,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f6686c46dcdd1245804c5903fa45daa
-      internalID: 7209791866757004406
+      spriteID: 8d91d55392beba0439a6f68c225f73e9
+      internalID: -9198102554489520265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_13
+      name: Cherries_13
       rect:
         serializedVersion: 2
         x: 416
@@ -448,14 +461,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2d678a7f900dbf4dab4f5f0eed8a0d9
-      internalID: -1462588236305530756
+      spriteID: 422b04abe515f16498ea6ff82e072eab
+      internalID: 3941576138836150160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_14
+      name: Cherries_14
       rect:
         serializedVersion: 2
         x: 448
@@ -469,14 +482,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0455f04e92d89db4cbe14eeed5e6a856
-      internalID: 4023135878370671054
+      spriteID: 197202fe0e245f74e96f1f13d47b6e63
+      internalID: 5159470138463433966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_15
+      name: Cherries_15
       rect:
         serializedVersion: 2
         x: 480
@@ -490,14 +503,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 48ed5cdde0c68304fa1241c934611c5d
-      internalID: -337911150936919937
+      spriteID: 43c1cd70622bae945ad3ea2f936d4e99
+      internalID: -447626866981707952
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Apple_16
+      name: Cherries_16
       rect:
         serializedVersion: 2
         x: 512
@@ -511,8 +524,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ab2a044731e611b40bfe5447aa3bc978
-      internalID: 9139289913481491577
+      spriteID: 2e0507f737783a849bba74c4645466e6
+      internalID: -7347827468922994342
       vertices: []
       indices: 
       edges: []
@@ -528,23 +541,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Apple_0: 7293598183456022363
-      Apple_1: 3211865404380153573
-      Apple_10: 1535906679059638393
-      Apple_11: -6207369124864647917
-      Apple_12: 7209791866757004406
-      Apple_13: -1462588236305530756
-      Apple_14: 4023135878370671054
-      Apple_15: -337911150936919937
-      Apple_16: 9139289913481491577
-      Apple_2: 4808522734667448011
-      Apple_3: -8577097333041121892
-      Apple_4: 1419576285154770477
-      Apple_5: -7706788487438311687
-      Apple_6: 8638710384840876012
-      Apple_7: -4689406079702324653
-      Apple_8: -4804661220611782958
-      Apple_9: 542562350195365616
+      Cherries_0: -4570538037665054336
+      Cherries_1: 1192583394799640888
+      Cherries_10: 3848886781296226410
+      Cherries_11: 7849828697117728527
+      Cherries_12: -9198102554489520265
+      Cherries_13: 3941576138836150160
+      Cherries_14: 5159470138463433966
+      Cherries_15: -447626866981707952
+      Cherries_16: -7347827468922994342
+      Cherries_2: -711454075617216784
+      Cherries_3: 5421872390997284277
+      Cherries_4: 5363950216444597340
+      Cherries_5: -8821299780031482609
+      Cherries_6: 1075779407821988168
+      Cherries_7: 8792570861257488375
+      Cherries_8: 3052119051097735194
+      Cherries_9: 7538113517902980163
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

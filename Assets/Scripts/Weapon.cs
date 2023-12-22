@@ -106,7 +106,7 @@ public class Weapon : MonoBehaviour
             }
 
             //생성직후 위치 0,0,0으로 초기화
-            bullet.transform.position = GameManager.instance.player.transform.position;
+            bullet.transform.position = new Vector3(0f,0f,0f);
 
             //생성직후 회전량 초기화
             bullet.transform.rotation = Quaternion.identity;
@@ -115,7 +115,11 @@ public class Weapon : MonoBehaviour
             bullet.transform.Rotate(Vector3.forward * 360 * i / count);
 
             //각도 조정 후 y축으로 위치이동
-            bullet.transform.Translate(0, 1.0f, 0f);
+            bullet.transform.Translate(0, 1.5f, 0f);
+
+            //위치 조정 후 각도를 다시 원래대로 돌림
+            bullet.transform.Rotate(-Vector3.forward * 360 * i / count);
+
 
             //불렛의 초기화 진행
             bullet.GetComponent<Bullet>().Init(damage, penetrate, Vector3.zero);
@@ -129,13 +133,8 @@ public class Weapon : MonoBehaviour
     //무기 자동회전 함수
     void AutoRotate()
     {
-        switch (id)
-        {
-            case 0:
-                //z축을 기준으로 속도만큼 자동회전
-                transform.Rotate(Vector3.forward , speed * Time.deltaTime);
-                break;
-        }
+           //z축을 기준으로 속도만큼 자동회전
+           transform.Rotate(Vector3.forward , speed * Time.deltaTime);
     }
 
 }

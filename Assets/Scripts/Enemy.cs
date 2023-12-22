@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int hp;
     public int maxHp;
     public bool isLive;
+    float knockTimer;
     private Rigidbody2D playerRigid;
     private Rigidbody2D rigid;
     Vector2 nextVec;
@@ -70,7 +71,10 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Dead", false);
     }
 
-
+    private void Update()
+    {
+        knockTimer += Time.deltaTime;
+    }
 
     //충돌 함수 생성
     private void OnTriggerEnter2D(Collider2D collision)
@@ -82,8 +86,13 @@ public class Enemy : MonoBehaviour
         //애너미의 체력을 불렛의 데미지만큼 감소
         hp -= collision.GetComponent<Bullet>().damage;
 
-        //애너미가 피격당할시 넉백 코루틴 호출
-        //StartCoroutine(KnockBack());
+        if(knockTimer > 0.7f)
+        {
+            //애너미가 피격당할시 넉백 코루틴 호출
+            StartCoroutine(KnockBack());
+            knockTimer = 0;
+        }
+ 
 
         if (hp > 0)
         {
@@ -93,6 +102,7 @@ public class Enemy : MonoBehaviour
         {
             //col.enabled = false;
             //rigid.simulated = false;
+            GameManager.instance.plusExp();
             spriter.sortingOrder = 1;
             isLive = false;
             animator.SetBool("Dead",true);
@@ -111,7 +121,7 @@ public class Enemy : MonoBehaviour
         Vector3 backVec = transform.position - playerPos;
 
         //리지드에 힘을 가함(정규화 후) ForceMode2D.Impulse는 타격,폭발처럼 순간적인 힘을 나타낼때 사용
-        rigid.AddForce(backVec.normalized * 1.5f, ForceMode2D.Impulse);
+        rigid.AddForce(backVec.normalized * 0.3f, ForceMode2D.Impulse);
 
         //1프레임 쉬기
         yield return wait;

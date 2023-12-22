@@ -1,58 +1,58 @@
 fileFormatVersion: 2
-guid: 031678d507e557a41b7a16fc33bf6c39
+guid: a2c110585eb710b408972fbc3b96136d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3776312371561069292
-    second: Melon_0
+      213: 1775669009216684005
+    second: Strawberry_0
   - first:
-      213: 2611220147007439301
-    second: Melon_1
+      213: -32040429760078815
+    second: Strawberry_1
   - first:
-      213: 2353208620542727372
-    second: Melon_2
+      213: -7106730570939000684
+    second: Strawberry_2
   - first:
-      213: 8821371696964291164
-    second: Melon_3
+      213: 4518513080991243510
+    second: Strawberry_3
   - first:
-      213: 8382193064667267037
-    second: Melon_4
+      213: 901954246582174200
+    second: Strawberry_4
   - first:
-      213: -3288833518496767930
-    second: Melon_5
+      213: 825325050284003712
+    second: Strawberry_5
   - first:
-      213: 4593711905992766363
-    second: Melon_6
+      213: -5158240598457465908
+    second: Strawberry_6
   - first:
-      213: -2703723749527953725
-    second: Melon_7
+      213: 2009151386410624793
+    second: Strawberry_7
   - first:
-      213: 4404175151357073704
-    second: Melon_8
+      213: -8828998067812341462
+    second: Strawberry_8
   - first:
-      213: -4406734128596351014
-    second: Melon_9
+      213: 7853139244501102106
+    second: Strawberry_9
   - first:
-      213: -8731991674958125425
-    second: Melon_10
+      213: 7386868840556686860
+    second: Strawberry_10
   - first:
-      213: -7029448349843301362
-    second: Melon_11
+      213: 9150055279739663228
+    second: Strawberry_11
   - first:
-      213: -909351362157965132
-    second: Melon_12
+      213: 8026213463552293463
+    second: Strawberry_12
   - first:
-      213: 2938550379556323724
-    second: Melon_13
+      213: 6850229642150134582
+    second: Strawberry_13
   - first:
-      213: -1316238954007984859
-    second: Melon_14
+      213: -7542899124980697566
+    second: Strawberry_14
   - first:
-      213: 2641464298146962395
-    second: Melon_15
+      213: -8532893379546982827
+    second: Strawberry_15
   - first:
-      213: 4074361457694701065
-    second: Melon_16
+      213: 1433410794814771726
+    second: Strawberry_16
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -157,11 +157,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Melon_0
+      name: Strawberry_0
       rect:
         serializedVersion: 2
         x: 0
@@ -175,14 +188,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e49f999ea0bf3243864ff5b92b20f7c
-      internalID: 3776312371561069292
+      spriteID: b014665f0d442714f94f6298db4d4eeb
+      internalID: 1775669009216684005
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_1
+      name: Strawberry_1
       rect:
         serializedVersion: 2
         x: 32
@@ -196,14 +209,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cbca6add0b0af0d4fa098523afe80aa7
-      internalID: 2611220147007439301
+      spriteID: 3114ce842c387444fa76380c1f9ff556
+      internalID: -32040429760078815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_2
+      name: Strawberry_2
       rect:
         serializedVersion: 2
         x: 64
@@ -217,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 340f3ad2557eb91498e7f662d9e23241
-      internalID: 2353208620542727372
+      spriteID: 8546c3598613c30498ac9e085370e2ff
+      internalID: -7106730570939000684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_3
+      name: Strawberry_3
       rect:
         serializedVersion: 2
         x: 96
@@ -238,14 +251,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72e3645b217b9f44080b83755cbd5b3a
-      internalID: 8821371696964291164
+      spriteID: 77fd840cd3cc1ee4c8f58dcf2acbb63e
+      internalID: 4518513080991243510
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_4
+      name: Strawberry_4
       rect:
         serializedVersion: 2
         x: 128
@@ -259,14 +272,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1aa467f5196b19443855ea3a96e5714d
-      internalID: 8382193064667267037
+      spriteID: d18b9a1e54cf750489500ade3548c6df
+      internalID: 901954246582174200
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_5
+      name: Strawberry_5
       rect:
         serializedVersion: 2
         x: 160
@@ -280,14 +293,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb09d128fddf0d4429ea274582abc154
-      internalID: -3288833518496767930
+      spriteID: 5972f03615be72d4a9635493eab003e7
+      internalID: 825325050284003712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_6
+      name: Strawberry_6
       rect:
         serializedVersion: 2
         x: 192
@@ -301,14 +314,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 99fc725327dd9514a81dc53c08984d63
-      internalID: 4593711905992766363
+      spriteID: 1d89dd6b102c8c14593b09cf21661b9d
+      internalID: -5158240598457465908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_7
+      name: Strawberry_7
       rect:
         serializedVersion: 2
         x: 224
@@ -322,14 +335,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 209ee70953d3275448d68a5f9e4120dd
-      internalID: -2703723749527953725
+      spriteID: 0303e863bdad1574a8a427f102fd2084
+      internalID: 2009151386410624793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_8
+      name: Strawberry_8
       rect:
         serializedVersion: 2
         x: 256
@@ -343,14 +356,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d07c9ac536c377c4a91dad71b3f60e05
-      internalID: 4404175151357073704
+      spriteID: 64fcb574b8d47504e8ec92b4224282cc
+      internalID: -8828998067812341462
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_9
+      name: Strawberry_9
       rect:
         serializedVersion: 2
         x: 288
@@ -364,14 +377,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 07c29928d2346ee41a4ec66c6e712a8c
-      internalID: -4406734128596351014
+      spriteID: 76cfa977c050b00428148c07cb2c71b1
+      internalID: 7853139244501102106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_10
+      name: Strawberry_10
       rect:
         serializedVersion: 2
         x: 320
@@ -385,14 +398,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b25ec4f67ba9a5b459ad1786adf8347c
-      internalID: -8731991674958125425
+      spriteID: 416edeeb3d011e940a4ccce5f726537a
+      internalID: 7386868840556686860
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_11
+      name: Strawberry_11
       rect:
         serializedVersion: 2
         x: 352
@@ -406,14 +419,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fa0664b832a9fc4eaaaac8dfdb539ee
-      internalID: -7029448349843301362
+      spriteID: 28955d04894b411479c44edca177f86d
+      internalID: 9150055279739663228
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_12
+      name: Strawberry_12
       rect:
         serializedVersion: 2
         x: 384
@@ -427,14 +440,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a990a06277e8b574f9f05a744dfb9de3
-      internalID: -909351362157965132
+      spriteID: 2dbde23a1ca7d6c47b4a9c23444043ff
+      internalID: 8026213463552293463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_13
+      name: Strawberry_13
       rect:
         serializedVersion: 2
         x: 416
@@ -448,14 +461,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 41860e8d6bdf6fb4e80ae5534d2f4e81
-      internalID: 2938550379556323724
+      spriteID: 6c0a55201ba9bf64b9bd8397973b4927
+      internalID: 6850229642150134582
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_14
+      name: Strawberry_14
       rect:
         serializedVersion: 2
         x: 448
@@ -469,14 +482,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ed08bd21a9ed6b4f9362e96422fcf90
-      internalID: -1316238954007984859
+      spriteID: 12569415f799fe843877ef5bfdcaeefc
+      internalID: -7542899124980697566
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_15
+      name: Strawberry_15
       rect:
         serializedVersion: 2
         x: 480
@@ -490,14 +503,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1d1d9f238832964e949a70245d6d927
-      internalID: 2641464298146962395
+      spriteID: 2891da74b27dd2f41bc6f77b1fa9b3ab
+      internalID: -8532893379546982827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Melon_16
+      name: Strawberry_16
       rect:
         serializedVersion: 2
         x: 512
@@ -511,8 +524,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f8d13ef6eb99424ca17aeda465ea8c8
-      internalID: 4074361457694701065
+      spriteID: b4867994873d744468e27e7c74fd7f97
+      internalID: 1433410794814771726
       vertices: []
       indices: 
       edges: []
@@ -528,23 +541,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Melon_0: 3776312371561069292
-      Melon_1: 2611220147007439301
-      Melon_10: -8731991674958125425
-      Melon_11: -7029448349843301362
-      Melon_12: -909351362157965132
-      Melon_13: 2938550379556323724
-      Melon_14: -1316238954007984859
-      Melon_15: 2641464298146962395
-      Melon_16: 4074361457694701065
-      Melon_2: 2353208620542727372
-      Melon_3: 8821371696964291164
-      Melon_4: 8382193064667267037
-      Melon_5: -3288833518496767930
-      Melon_6: 4593711905992766363
-      Melon_7: -2703723749527953725
-      Melon_8: 4404175151357073704
-      Melon_9: -4406734128596351014
+      Strawberry_0: 1775669009216684005
+      Strawberry_1: -32040429760078815
+      Strawberry_10: 7386868840556686860
+      Strawberry_11: 9150055279739663228
+      Strawberry_12: 8026213463552293463
+      Strawberry_13: 6850229642150134582
+      Strawberry_14: -7542899124980697566
+      Strawberry_15: -8532893379546982827
+      Strawberry_16: 1433410794814771726
+      Strawberry_2: -7106730570939000684
+      Strawberry_3: 4518513080991243510
+      Strawberry_4: 901954246582174200
+      Strawberry_5: 825325050284003712
+      Strawberry_6: -5158240598457465908
+      Strawberry_7: 2009151386410624793
+      Strawberry_8: -8828998067812341462
+      Strawberry_9: 7853139244501102106
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
