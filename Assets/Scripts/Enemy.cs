@@ -7,28 +7,31 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    public int hp;
+    public float hp;
     public int maxHp;
     public bool isLive;
     float knockTimer;
     private Rigidbody2D playerRigid;
     private Rigidbody2D rigid;
     Vector2 nextVec;
+    public RuntimeAnimatorController[] controllers;
     Animator animator;
     SpriteRenderer spriter;
-    WaitForFixedUpdate wait;
     Collider2D col;
+    public DropItem dropItem;
     private void Awake()
     {
         col = GetComponent<Collider2D>();
         spriter = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
-        wait = new WaitForFixedUpdate();
     }
 
     private void FixedUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         //애너미가 죽은 상태거나 피격 상태면 함수 종료
         if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
@@ -45,12 +48,21 @@ public class Enemy : MonoBehaviour
         rigid.velocity = Vector3.zero;
 
     }
-
+    public void Init(SpawnDate data)
+    {
+        animator.runtimeAnimatorController = controllers[data.SpriteType];
+        speed = data.speed;
+        maxHp = data.health;
+        hp = data.health;
+    }
     //LateUpdate에 애너미 스프라이트의 반전상황과 관련된 코드 작성
     //애너미가 false상태면 함수 종료
     //애너미의 방향을 토대로 반전 설정
     private void LateUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         if (!isLive) 
             return;
 
@@ -61,7 +73,6 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         playerRigid = GameManager.instance.player.GetComponent<Rigidbody2D>();
-        isLive = true;
         hp = maxHp;
 
         isLive = true;
@@ -73,6 +84,9 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         knockTimer += Time.deltaTime;
     }
 
@@ -85,31 +99,42 @@ public class Enemy : MonoBehaviour
 
         //애너미의 체력을 불렛의 데미지만큼 감소
         hp -= collision.GetComponent<Bullet>().damage;
+        AudioManager.instance.PlayerSfx(AudioManager.Sfx.Hit);
 
-        if(knockTimer > 0.7f)
-        {
-            //애너미가 피격당할시 넉백 코루틴 호출
-            StartCoroutine(KnockBack());
-            knockTimer = 0;
-        }
- 
-
+  
         if (hp > 0)
         {
             animator.SetTrigger("Hit");
+            StartCoroutine(KnockBack());
         }
         else
         {
-            //col.enabled = false;
-            //rigid.simulated = false;
-            GameManager.instance.plusExp();
-            spriter.sortingOrder = 1;
-            isLive = false;
-            animator.SetBool("Dead",true);
+           CreateDropItem();
+           StartCoroutine(EnemyDead());
         }
 
     }
 
+
+
+    void CreateDropItem()
+    {
+        //풀 매니저에 새롭게 자식오브젝트로 생성
+        GameObject item = GameManager.instance.pool.Get(5);
+        item.transform.position = transform.position;
+
+    }
+    IEnumerator EnemyDead()
+    {
+        isLive = false;
+        GameManager.instance.plusKill();
+        spriter.sortingOrder = 1;
+        animator.SetBool("Dead", true);
+        yield return new WaitForSeconds(0.5f);
+        transform.gameObject.SetActive(false);
+        col.enabled = false;
+        rigid.simulated = false;
+    }
 
     //넉백을 위한 코루틴 함수
     IEnumerator KnockBack()
@@ -121,10 +146,10 @@ public class Enemy : MonoBehaviour
         Vector3 backVec = transform.position - playerPos;
 
         //리지드에 힘을 가함(정규화 후) ForceMode2D.Impulse는 타격,폭발처럼 순간적인 힘을 나타낼때 사용
-        rigid.AddForce(backVec.normalized * 0.3f, ForceMode2D.Impulse);
+        rigid.AddForce(backVec.normalized * 0.2f, ForceMode2D.Impulse);
 
         //1프레임 쉬기
-        yield return wait;
+        yield return new WaitForSeconds(0.3f);
     }
 
 

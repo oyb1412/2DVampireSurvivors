@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e72e8008434bf44c841f8f426001af1, type: 3}
+  m_Name: Item 0
+  m_EditorClassIdentifier: 
+  itemType: 0
+  itemId: 0
+  itemDesc: 'Damage {0}% Up
+
+    Range {1}% Up'
+  itemName: MoonSlash
+  itemIcon: {fileID: 1140539933, guid: b559eab199145a24fae97f0ae7757563, type: 3}
+  count: 1
+  moveSPeed: 0
+  damage: 11
+  range: 1
+  CT: 2
+  upgradeCT: []
+  upgradeDamages:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  upgradeRange:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  upgradeMoveSpeed: []
+  weaponObject: {fileID: 7469634949865378829, guid: bbdcfecf0ff400043bca9c4464ef62d8, type: 3}

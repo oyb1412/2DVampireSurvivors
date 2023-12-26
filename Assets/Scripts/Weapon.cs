@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,39 +7,63 @@ public class Weapon : MonoBehaviour
 {
     public int id;
     public int prefabId;
-    public int damage;
-    public float speed;
-    public int count;
-    public int penetrate;
+    public float damage;
+    public float coolTime;
+    public int count =1;
+    public int weaponType;
     float timer;
-    private void Start()
+    float attackTimer;
+    public float range;
+    public ItemData data;
+    private void Awake()
     {
-        Init();
     }
-
     private void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         switch (id)
         {
             case 0:
-                AutoRotate();
+                attackTimer += Time.deltaTime;
+                if(attackTimer > coolTime)
+                {
+                    attackTimer = 0;
+                    FireMoonSlash();
+                }
                 break;
             case 1:
                 timer += Time.deltaTime;
-                if(timer > speed)
+                if(timer > coolTime)
                 {
                     timer = 0;
-                    Fire();
+                    FireDagger();
+                }
+                break;
+            case 7:
+                AutoRotate();
+                break;
+            case 8:
+                timer += Time.deltaTime;
+                if(timer > coolTime)
+                {
+                    timer = 0;
+                    FireCross();
                 }
                 break;
         }
-        if(Input.GetButtonDown("Jump"))
-        {
-            LevelUp(2,1);
-        }
     }
 
-    void Fire()
+    void FireMoonSlash()
+    {
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        bullet.parent = GameObject.Find("Weapon0").transform;
+        bullet.transform.position = GameManager.instance.player.transform.position;
+        bullet.GetComponent<Bullet>().Init(damage, weaponType, Vector3.zero, count);
+    }
+
+    void FireDagger()
     {
         //스캐너에 걸린 애너미가 없으면 함수 종료
         if (!GameManager.instance.player.scanner.target)
@@ -53,35 +78,81 @@ public class Weapon : MonoBehaviour
         //풀 매니저에 새롭게 자식오브젝트로 생성
         Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
         //불렛 오브젝트를 웨폰1 오브젝트의 하위로 이동
-        bullet.parent = GameObject.Find("Weapon 1").transform;
+        bullet.parent = GameObject.Find("Weapon1").transform;
         //불렛 위치 초기화
         bullet.position = playerPos;
         //불렛의 쿼터니온 회전
         bullet.rotation = Quaternion.FromToRotation(Vector3.up, vecDir);
+
+        bullet.localScale = Vector3.one * range;
         //데미지와 관통력, 발사 방향 지정
-        bullet.GetComponent<Bullet>().Init(damage, count, vecDir);
+        bullet.GetComponent<Bullet>().Init(damage, weaponType, vecDir, count);
+    }
+
+    void FireCross()
+    {
+        //스캐너에 걸린 애너미가 없으면 함수 종료
+        if (!GameManager.instance.player.scanner.target)
+            return;
+        //플레이어 포지션
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        //스캐너에 걸린 애너미 위치 
+        Vector3 targetPos = GameManager.instance.player.scanner.target.position;
+        //플레이어->애너미 벡터 저장후 정규화
+        Vector3 vecDir = targetPos - playerPos;
+        vecDir = vecDir.normalized;
+        //풀 매니저에 새롭게 자식오브젝트로 생성
+        Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
+        //불렛 오브젝트를 웨폰1 오브젝트의 하위로 이동
+        bullet.parent = GameObject.Find("Weapon8").transform;
+        //불렛 위치 초기화
+        bullet.position = playerPos;
+        bullet.localScale = Vector3.one * range;
+        bullet.GetComponent<Bullet>().Init(damage, id, vecDir, count);
 
     }
-    void LevelUp(int damage, int count)
+    public void LevelUp(float damage, float range)
     {
         this.damage = damage;
-        this.count += count;
+        this.range = range;
+        count++;
 
-        if (id == 0)
+        if (id == 7)
             Assign();
+
+        GameManager.instance.player.BroadcastMessage("ApplyPassive", SendMessageOptions.DontRequireReceiver);
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        name = "Weapon" + data.itemId;
+        transform.parent = GameManager.instance.player.transform;
+        transform.localPosition = Vector3.zero;
+
+        id = data.itemId;
+        damage = data.damage;
+        count = data.count;
+        range = data.range;
+        for(int i = 0; i<GameManager.instance.pool.prefabs.Length; i++)
+        {
+            if(data.weaponObject == GameManager.instance.pool.prefabs[i])
+            {
+                prefabId = i;
+                break;
+            }
+        }
+
+
+        coolTime = data.CT;
+        weaponType = (int)data.itemType;
         switch (id)
         {
-            case 0:
-                speed = -200f;
+            case 7:
                 Assign();
                 break;
-            case 1:
-                break;
         }
+
+        GameManager.instance.player.BroadcastMessage("ApplyPassive", SendMessageOptions.DontRequireReceiver);
     }
 
     //무기 생성, 배치
@@ -91,22 +162,19 @@ public class Weapon : MonoBehaviour
         for(int i = 0; i< count; i++)
         {
             Transform bullet;
-            //인덱스가 현재 생성된 웨폰의 자식오브젝트보다 적을경우(이미 생성된 무기가 있는 경우)
-            if(i < transform.childCount)
+            if (i < transform.childCount)
             {
                 //그 자식 오브젝트를 그대로 사용
                 bullet = transform.GetChild(i);
             }
-            else     //레벨업으로 인해 새롭게 배치를 진행할 경우
+            //레벨업으로 인해 새롭게 배치를 진행할 경우
+            else
             {
-                //풀 매니저에 새롭게 자식오브젝트로 생성
                 bullet = GameManager.instance.pool.Get(prefabId).transform;
-                //풀 매니저에 있는 자식 오브젝트를 weapon으로 이동
                 bullet.parent = transform;
             }
-
             //생성직후 위치 0,0,0으로 초기화
-            bullet.transform.position = new Vector3(0f,0f,0f);
+            bullet.transform.position = GameManager.instance.player.transform.position;
 
             //생성직후 회전량 초기화
             bullet.transform.rotation = Quaternion.identity;
@@ -117,12 +185,10 @@ public class Weapon : MonoBehaviour
             //각도 조정 후 y축으로 위치이동
             bullet.transform.Translate(0, 1.5f, 0f);
 
-            //위치 조정 후 각도를 다시 원래대로 돌림
-            bullet.transform.Rotate(-Vector3.forward * 360 * i / count);
-
+            bullet.localScale = Vector3.one * range;
 
             //불렛의 초기화 진행
-            bullet.GetComponent<Bullet>().Init(damage, penetrate, Vector3.zero);
+            bullet.GetComponent<Bullet>().Init(damage, id, Vector3.zero, count);
         }
 
 
@@ -134,7 +200,7 @@ public class Weapon : MonoBehaviour
     void AutoRotate()
     {
            //z축을 기준으로 속도만큼 자동회전
-           transform.Rotate(Vector3.forward , speed * Time.deltaTime);
+           transform.Rotate(Vector3.forward , 200f * Time.deltaTime);
     }
 
 }

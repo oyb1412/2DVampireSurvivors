@@ -22,6 +22,9 @@ public class Scanner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         //원형의 캐스트를 쏘고 모든 결과를 반환하는 함수 (1.캐스팅 시작 위치 2.원의 반지름 3.캐스팅 방향 4.쏘는 방향의 길이 5.대상 레이어 )
         targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0f, layer);
         target = GetTarget();

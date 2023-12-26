@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e72e8008434bf44c841f8f426001af1, type: 3}
+  m_Name: Item 8
+  m_EditorClassIdentifier: 
+  itemType: 9
+  itemId: 8
+  itemDesc: 'Damage {0}% Up
+
+    Range {1}% Up'
+  itemName: Cross
+  itemIcon: {fileID: 21300000, guid: 5589094c98a2c9a4cbc7148f463a2f1b, type: 3}
+  count: 10
+  damage: 10
+  range: 4
+  CT: 5
+  upgradeCT: []
+  upgradeDamages:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  upgradeRange:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  upgradeMoveSpeed: []
+  weaponObject: {fileID: 3526572566768862289, guid: 58515f6a6594e474aa0872239dd76281, type: 3}

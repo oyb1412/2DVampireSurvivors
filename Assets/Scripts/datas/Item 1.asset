@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e72e8008434bf44c841f8f426001af1, type: 3}
+  m_Name: Item 1
+  m_EditorClassIdentifier: 
+  itemType: 1
+  itemId: 1
+  itemDesc: 'Damage {0}% Up
+
+    penetrat 1 Up'
+  itemName: Dagger
+  itemIcon: {fileID: 21300000, guid: b7f78d0d359adfa4ea148c5209891aa9, type: 3}
+  count: 0
+  moveSPeed: 0
+  damage: 3
+  range: 1
+  CT: 1
+  upgradeCT: []
+  upgradeDamages:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  upgradeRange: []
+  upgradeMoveSpeed: []
+  weaponObject: {fileID: 3526572566768862289, guid: 76aef7d6da1dc264fb246abff5817a7f, type: 3}

@@ -26,28 +26,43 @@ public class HUD : MonoBehaviour
         myText = GetComponent<Text>();
         mySlider = GetComponent<Slider>();
     }
+    private void FixedUpdate()
+    {
+        if (!GameManager.instance.isLive)
+            return;
 
+        switch (type)
+        {
+            case infoType.hp:
+                //플레이어 포지션
+                Vector3 playerPos = GameManager.instance.player.transform.position;
+                //체력바의 포지션을 플레이어의 world포지션으로 변경해준다.
+                myRect.position = Camera.main.WorldToScreenPoint(new Vector3(playerPos.x, playerPos.y + 1.0f, playerPos.z));
+                break;
+        }
+    }
     private void LateUpdate()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         switch (type)
         {
             case infoType.kill:
                 //처치 횟수 텍스트로 표시
-                myText.text = "Kill : " + (GameManager.instance.kill.ToString());
+                myText.text = GameManager.instance.kill.ToString();
             break;
             case infoType.hp:
-                //플레이어 포지션
-                Vector3 playerPos = GameManager.instance.player.transform.position;
+
                 //플레이어의 현재 체력상태 / 최대 체력상태를 계산하여 슬라이드의 %를 계산
                 mySlider.value = GameManager.instance.hp / GameManager.instance.maxHp;
-                //체력바의 포지션을 플레이어의 world포지션으로 변경해준다.
-                myRect.position = Camera.main.WorldToScreenPoint(new Vector3(playerPos.x,playerPos.y + 0.7f,playerPos.z));
+
             break;
             case infoType.exp:
                 //현재 exp
                 float curExp = GameManager.instance.exp;
                 //최대 exp
-                float maxExp = GameManager.instance.maxExp[GameManager.instance.level];
+                float maxExp = GameManager.instance.maxExp[Mathf.Min(GameManager.instance.level, GameManager.instance.maxExp.Length -1 )];
                 //슬라이더 비율
                 mySlider.value = curExp / maxExp;
             break;
@@ -61,7 +76,7 @@ public class HUD : MonoBehaviour
             break;
             case infoType.level:
                 //현재 레벨 텍스트로 표시
-                myText.text = "Level : " + GameManager.instance.level.ToString();
+                myText.text = "Lv : " + GameManager.instance.level.ToString();
                 break;
         }
     }

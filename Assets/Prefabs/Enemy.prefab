@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6367560908665664636, guid: 3750f45c844123341b9a777a96cb1eca, type: 3}
+  m_Sprite: {fileID: -1025831447, guid: d66df1d88f005c343a390ee598f9e04b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 8497882153430756827}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: c654d60af72c2b1469e013f7d2dbfe9b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8ecee1e8246316d4c975a8f9f0d3f9d7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -167,7 +167,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.5
+  m_Mass: 0.2
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -198,6 +198,11 @@ MonoBehaviour:
   hp: 0
   maxHp: 10
   isLive: 0
+  controllers:
+  - {fileID: 9100000, guid: 8ecee1e8246316d4c975a8f9f0d3f9d7, type: 2}
+  - {fileID: 9100000, guid: ca4bc38587a52b14dbd3d24e9d05ddb3, type: 2}
+  - {fileID: 22100000, guid: b19cae7c0d906b340ac71738cbbc2ee6, type: 2}
+  dropItem: {fileID: 1954990492130331159, guid: 84f7ea458f3349d43b81f0a3a1e79a95, type: 3}
 --- !u!114 &6875542258151570705
 MonoBehaviour:
   m_ObjectHideFlags: 0
