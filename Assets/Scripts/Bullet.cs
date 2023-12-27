@@ -28,7 +28,7 @@ public class Bullet : MonoBehaviour
 
         if(this.weaponType == 8 ) 
         {
-            rigid.velocity = dirVec * 5f;
+            rigid.velocity = dirVec * 7f;
         }
     }
 
@@ -59,6 +59,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         //충돌 대상이 적이 아니거나 불렛이 발사형이 아닌 경우엔 함수 종료
         if (!collision.CompareTag("Enemy") || weaponType != 1 && weaponType != 8)
             return;
@@ -74,4 +75,6 @@ public class Bullet : MonoBehaviour
         }
 
     }
+
+
 }

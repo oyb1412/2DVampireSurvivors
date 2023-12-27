@@ -27,8 +27,7 @@ public class Spawner : MonoBehaviour
         if (!GameManager.instance.isLive)
             return;
 
-        gameLevel = Mathf.Min(GameManager.instance.minTime, spawnDate.Length - 1);
-        Debug.Log(gameLevel);
+        gameLevel = Mathf.Min(GameManager.instance.minTime / 2, spawnDate.Length - 2);
         Spawn();
     }
     //게임레벨로 몹 소환
@@ -44,16 +43,16 @@ public class Spawner : MonoBehaviour
 
             //스폰된 애너미의 위치는 여러개의 스폰 포인트중 랜덤하게 지정
             enemy.transform.position = spawnerPoint[UnityEngine.Random.Range(1, spawnerPoint.Length)].position;
-            enemy.GetComponent<Enemy>().Init(spawnDate[2]);
+            enemy.GetComponent<Enemy>().Init(spawnDate[3]);
             eleteTimer = 0;
         }
-        if(timer > spawnDate[gameLevel].spawnTime)
+        if (timer > spawnDate[gameLevel].spawnTime)
         {
             //사용할 프리펩을 파라매터로 입력
             GameObject enemy = GameManager.instance.pool.Get(0);
-
+            Debug.Log(gameLevel);
             //스폰된 애너미의 위치는 여러개의 스폰 포인트중 랜덤하게 지정
-            enemy.transform.position = spawnerPoint[UnityEngine.Random.Range(1,spawnerPoint.Length)].position;
+            enemy.transform.position = spawnerPoint[UnityEngine.Random.Range(1, spawnerPoint.Length)].position;
             enemy.GetComponent<Enemy>().Init(spawnDate[gameLevel]);
             timer = 0;
         }

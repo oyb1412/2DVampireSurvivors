@@ -39,13 +39,13 @@ public class Item : MonoBehaviour
         switch(itemData.itemType)
         {
             case ItemData.ItemType.Melee:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] * 100, itemData.upgradeRange[level] * 100);
+                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level], itemData.upgradeRange[level] * 100);
                 break;
             case ItemData.ItemType.LongRange:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] * 100);
+                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
                 break;
             case ItemData.ItemType.Damage:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] * 100);
+                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
                 break;
             case ItemData.ItemType.Range:
                 descText.text = string.Format(itemData.itemDesc, itemData.upgradeRange[level] * 100);
@@ -57,10 +57,10 @@ public class Item : MonoBehaviour
                 descText.text = string.Format(itemData.itemDesc, itemData.upgradeMoveSpeed[level] * 100);
                 break;
             case ItemData.ItemType.RotateWeapon:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] * 100, itemData.upgradeRange[level] * 100);
+                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level], itemData.upgradeRange[level] * 100);
                 break;
             case ItemData.ItemType.BounceWeapon:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] * 100, itemData.upgradeRange[level] * 100);
+                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
                 break;
         }
     }
@@ -85,8 +85,8 @@ public class Item : MonoBehaviour
                     float nextDamage = weapon.damage;
                     float nextRange = weapon.range;
 
-                    nextDamage = weapon.damage + (5* itemData.upgradeDamages[level]);
-                    nextRange = weapon.range + (1 * itemData.upgradeRange[level]);
+                    nextDamage = weapon.damage + itemData.upgradeDamages[level];
+                    nextRange = weapon.range * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
@@ -106,7 +106,7 @@ public class Item : MonoBehaviour
                 {
                     float nextDamage = weapon.damage;
 
-                    nextDamage = weapon.damage +(3* itemData.upgradeDamages[level]);
+                    nextDamage = weapon.damage +itemData.upgradeDamages[level];
 
                     weapon.LevelUp(nextDamage, 1);
                 }
@@ -196,8 +196,8 @@ public class Item : MonoBehaviour
                     float nextDamage = weapon.damage;
                     float nextRange = weapon.range;
 
-                    nextDamage = weapon.damage + (5 * itemData.upgradeDamages[level]);
-                    nextRange = weapon.range + (1 * itemData.upgradeRange[level]);
+                    nextDamage = weapon.damage +  itemData.upgradeDamages[level];
+                    nextRange = weapon.range * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
@@ -216,12 +216,10 @@ public class Item : MonoBehaviour
                 else
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.range;
 
-                    nextDamage = weapon.damage + (4 * itemData.upgradeDamages[level]);
-                    nextRange = weapon.range + (1 * itemData.upgradeRange[level]);
+                    nextDamage = weapon.damage + itemData.upgradeDamages[level];
 
-                    weapon.LevelUp(nextDamage, nextRange);
+                    weapon.LevelUp(nextDamage, 1);
                 }
                 iconObj[3].SetActive(true);
                 Text objCross = iconObj[3].GetComponentInChildren<Text>();

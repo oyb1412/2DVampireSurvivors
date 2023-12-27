@@ -14,23 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   itemId: 0
-  itemDesc: 'Damage {0}% Up
-
-    Range {1}% Up'
-  itemName: MoonSlash
+  itemDesc: "\uB370\uBBF8\uC9C0 {0} \uC99D\uAC00\n\uBC94\uC704 {1}% \uC99D\uAC00\n"
+  itemName: "\uAC80"
   itemIcon: {fileID: 1140539933, guid: b559eab199145a24fae97f0ae7757563, type: 3}
   count: 1
-  moveSPeed: 0
   damage: 11
   range: 1
   CT: 2
   upgradeCT: []
   upgradeDamages:
-  - 0.1
-  - 0.1
-  - 0.1
-  - 0.1
-  - 0.1
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
   upgradeRange:
   - 0.1
   - 0.1

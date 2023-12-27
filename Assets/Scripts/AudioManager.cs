@@ -24,7 +24,8 @@ public class AudioManager : MonoBehaviour
         LevelUp,
         Lose,
         Select,
-        Victory
+        Victory,
+        PlayerHit
     }
     private void Awake()
     {

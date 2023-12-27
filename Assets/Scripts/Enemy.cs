@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     public float hp;
     public int maxHp;
     public bool isLive;
-    float knockTimer;
+    public int enemyType;
     private Rigidbody2D playerRigid;
     private Rigidbody2D rigid;
     Vector2 nextVec;
@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
     }
     public void Init(SpawnDate data)
     {
+        enemyType = data.SpriteType;
         animator.runtimeAnimatorController = controllers[data.SpriteType];
         speed = data.speed;
         maxHp = data.health;
@@ -82,13 +83,6 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Dead", false);
     }
 
-    private void Update()
-    {
-        if (!GameManager.instance.isLive)
-            return;
-
-        knockTimer += Time.deltaTime;
-    }
 
     //충돌 함수 생성
     private void OnTriggerEnter2D(Collider2D collision)
@@ -109,7 +103,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-           CreateDropItem();
+           dropItem.Create(enemyType,transform.position);
            StartCoroutine(EnemyDead());
         }
 
@@ -117,13 +111,8 @@ public class Enemy : MonoBehaviour
 
 
 
-    void CreateDropItem()
-    {
-        //풀 매니저에 새롭게 자식오브젝트로 생성
-        GameObject item = GameManager.instance.pool.Get(5);
-        item.transform.position = transform.position;
-
-    }
+ 
+    
     IEnumerator EnemyDead()
     {
         isLive = false;

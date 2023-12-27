@@ -24,12 +24,13 @@ public class GameManager : MonoBehaviour
     //체력
     public float hp;
     //최대 체력
-    public float maxHp = 100;
+    public float maxHp;
 
     public bool isLive = false;
 
     public Restart restartUi;
     public GameObject EnemyCleaner;
+    public AssignBox boxManager;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -42,7 +43,6 @@ public class GameManager : MonoBehaviour
         hp = maxHp;
         isLive = true;
         levelUp.Select(0);
-
         AudioManager.instance.PlayerBgm(true);
         ReStart();
 

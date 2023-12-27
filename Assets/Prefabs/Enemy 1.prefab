@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 8497882153430756827}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca4bc38587a52b14dbd3d24e9d05ddb3, type: 2}
+  m_Controller: {fileID: 22100000, guid: 0fe1699b8fdb33e47a92b9c199c60ddb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -198,6 +198,8 @@ MonoBehaviour:
   hp: 0
   maxHp: 10
   isLive: 0
+  enemyType: 0
+  controllers: []
   dropItem: {fileID: 1954990492130331159, guid: 84f7ea458f3349d43b81f0a3a1e79a95, type: 3}
 --- !u!114 &6875542258151570705
 MonoBehaviour:

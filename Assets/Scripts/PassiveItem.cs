@@ -30,7 +30,7 @@ public class PassiveItem : MonoBehaviour
 
         foreach (Weapon weapon in weapons)
         {
-            weapon.coolTime = weapon.coolTime - (1 * value);
+            weapon.coolTime = weapon.coolTime - (value);
         }
     }
 
@@ -45,15 +45,7 @@ public class PassiveItem : MonoBehaviour
 
         foreach (Weapon weapon in weapons)
         {
-            switch(weapon.id)
-            {
-                case 0:
-                    weapon.damage = weapon.damage + (5 * value);
-                    break;
-                case 1:
-                    weapon.damage = weapon.damage + (3 * value);
-                    break;
-            }
+           weapon.damage = weapon.damage + value;
         }
     }
 
@@ -63,7 +55,7 @@ public class PassiveItem : MonoBehaviour
 
         foreach (Weapon weapon in weapons)
         {
-           weapon.range = weapon.range + (1 * value);
+           weapon.range = weapon.range * (1 + value);
         }
     }
 

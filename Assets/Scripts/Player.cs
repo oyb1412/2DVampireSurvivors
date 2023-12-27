@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter;
     Animator animator;
     public Scanner scanner;
+    float audioTimer = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour
         if (!GameManager.instance.isLive)
             return;
 
+        audioTimer += Time.deltaTime;
+
         rigid.MovePosition(rigid.position + inputVec * speed);
     }
 
@@ -49,7 +52,14 @@ public class Player : MonoBehaviour
         if (!GameManager.instance.isLive || !collision.gameObject.CompareTag("Enemy"))
             return;
 
-        GameManager.instance.hp -= 10 * Time.deltaTime;
+
+        if(audioTimer >0.5f)
+        {
+            //피격효과음 실행
+            AudioManager.instance.PlayerSfx(AudioManager.Sfx.PlayerHit);
+            audioTimer = 0;
+        }
+        GameManager.instance.hp -= 10f * Time.deltaTime;
 
         if (GameManager.instance.hp < 0)
         {

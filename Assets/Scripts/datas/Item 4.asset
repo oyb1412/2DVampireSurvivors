@@ -12,27 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e72e8008434bf44c841f8f426001af1, type: 3}
   m_Name: Item 4
   m_EditorClassIdentifier: 
-  itemType: 4
+  itemType: 5
   itemId: 4
-  itemDesc: 'Recovery
-
-    Max Hp'
-  itemName: Recovery
+  itemDesc: "\uCD5C\uB300 \uCCB4\uB825 \uD68C\uBCF5"
+  itemName: "\uCCB4\uB825 \uD68C\uBCF5"
   itemIcon: {fileID: 21300000, guid: 3d7e9d0a92893a041ba6ec9547527d43, type: 3}
   count: 0
   damage: 0
   range: 0
-  speed: 0
-  upgradeDamages:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  upgradeRange:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  CT: 0
+  upgradeCT: []
+  upgradeDamages: []
+  upgradeRange: []
+  upgradeMoveSpeed: []
   weaponObject: {fileID: 0}
