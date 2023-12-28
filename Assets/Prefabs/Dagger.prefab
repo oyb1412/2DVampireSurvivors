@@ -136,6 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 3
   weaponType: 0
+  count: 0
 --- !u!50 &-2278626228754593977
 Rigidbody2D:
   serializedVersion: 4

@@ -18,20 +18,26 @@ public class Bullet : MonoBehaviour
 
     public void Init(float damage, float weaponType, Vector3 dirVec, int count)
     {
-        this.damage = damage;
+        this.damage = damage / 10;
         this.weaponType = weaponType;
         this.count = count;
-        if(this.weaponType == 1 )
-        {
-            rigid.velocity = dirVec * 15f;
-        }
 
-        if(this.weaponType == 8 ) 
+        switch(weaponType)
         {
-            rigid.velocity = dirVec * 7f;
+            case 1:
+                rigid.velocity = dirVec * 15f;
+                break;
+            case 8:
+                rigid.velocity = dirVec * 7f;
+                break;
         }
+     
     }
 
+    private void OnEnable()
+    {
+        transform.position = GameManager.instance.player.transform.position;
+    }
     private void Update()
     {
         switch(weaponType)
@@ -44,7 +50,7 @@ public class Bullet : MonoBehaviour
                     gameObject.SetActive(false);
                     deleteTimer = 0;
                 }
-                transform.position = GameManager.instance.player.transform.position;
+                //transform.position = GameManager.instance.player.transform.position;
                 break;
             case 1:
                 Vector3 pos = transform.position - GameManager.instance.player.transform.position;

@@ -11,57 +11,83 @@ public class Item : MonoBehaviour
     public Weapon weapon;
     public PassiveItem passive;
     Image iconImage;
-    Text nameText;
-    Text descText;
     Text levelText;
+    Text descText;
     public GameObject[] iconObj;
     private void Awake()
     {
         iconImage = GetComponentsInChildren<Image>()[1];
-        Text[] texts = GetComponentsInChildren<Text>();
-
-
-        levelText = texts[0];
-        nameText = texts[1];
-        descText = texts[2];
-        nameText.text = itemData.itemName;
-        descText.text = itemData.itemDesc;
+        Text[] saveText = GetComponentsInChildren<Text>();
+        levelText = saveText[0];
+        descText = saveText[1];
 
         iconImage.sprite = itemData.itemIcon;
-        
-
     }
 
     private void OnEnable()
     {
         levelText.text = "Lv." + (level + 1);
-
-        switch(itemData.itemType)
+        if (level == 0)
         {
-            case ItemData.ItemType.Melee:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level], itemData.upgradeRange[level] * 100);
-                break;
-            case ItemData.ItemType.LongRange:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
-                break;
-            case ItemData.ItemType.Damage:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
-                break;
-            case ItemData.ItemType.Range:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeRange[level] * 100);
-                break;
-            case ItemData.ItemType.CoolTime:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeCT[level] * 100);
-                break;
-            case ItemData.ItemType.MoveSpeed:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeMoveSpeed[level] * 100);
-                break;
-            case ItemData.ItemType.RotateWeapon:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level], itemData.upgradeRange[level] * 100);
-                break;
-            case ItemData.ItemType.BounceWeapon:
-                descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
-                break;
+            descText.text = itemData.itemBaseDesc;
+        }
+        else if(level > 5)
+        {
+            switch (itemData.itemType)
+            {
+                case ItemData.ItemType.Melee:
+                case ItemData.ItemType.RotateWeapon:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] / 10, itemData.upgradeRange[level] * 10);
+                    break;
+                case ItemData.ItemType.LongRange:
+                case ItemData.ItemType.BounceWeapon:
+                case ItemData.ItemType.Damage:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level] / 10);
+                    break;
+                case ItemData.ItemType.Range:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeRange[level] * 10);
+                    break;
+                case ItemData.ItemType.CoolTime:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeCT[level] * 10);
+                    break;
+                case ItemData.ItemType.MoveSpeed:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeMoveSpeed[level] * 10);
+                    break;
+                case ItemData.ItemType.Heal:
+                    descText.text = string.Format(itemData.itemDesc);
+                    break;
+
+
+            }
+        }
+        else
+        {
+            switch (itemData.itemType)
+            {
+                case ItemData.ItemType.Melee:
+                case ItemData.ItemType.RotateWeapon:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level], itemData.upgradeRange[level] * 100);
+                    break;
+                case ItemData.ItemType.LongRange:
+                case ItemData.ItemType.BounceWeapon:
+                case ItemData.ItemType.Damage:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeDamages[level]);
+                    break;
+                case ItemData.ItemType.Range:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeRange[level] * 100);
+                    break;
+                case ItemData.ItemType.CoolTime:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeCT[level] * 100);
+                    break;
+                case ItemData.ItemType.MoveSpeed:
+                    descText.text = string.Format(itemData.itemDesc, itemData.upgradeMoveSpeed[level] * 100);
+                    break;
+                case ItemData.ItemType.Heal:
+                    descText.text = string.Format(itemData.itemDesc);
+                    break;
+
+
+            }
         }
     }
 
@@ -71,14 +97,22 @@ public class Item : MonoBehaviour
     {
         switch (itemData.itemType)
         {
-                  
-
             case ItemData.ItemType.Melee:
                 if (level == 0)
                 {
                     GameObject newWeapon = new GameObject();
                     weapon = newWeapon.AddComponent<Weapon>();
                     weapon.Init(itemData);
+                }
+                else if(level > 5)
+                {
+                    float nextDamage = weapon.damage;
+                    float nextRange = weapon.range;
+
+                    nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
+                    nextRange = weapon.range * (1 + (itemData.upgradeRange[level] / 10));
+
+                    weapon.LevelUp(nextDamage, nextRange);
                 }
                 else
                 {
@@ -102,6 +136,14 @@ public class Item : MonoBehaviour
                     weapon = newWeapon.AddComponent<Weapon>();
                     weapon.Init(itemData);
                 }
+                else if (level > 5)
+                {
+                    float nextDamage = weapon.damage;
+
+                    nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
+
+                    weapon.LevelUp(nextDamage, 1);
+                }
                 else
                 {
                     float nextDamage = weapon.damage;
@@ -121,6 +163,12 @@ public class Item : MonoBehaviour
                     passive = newWeapon.AddComponent<PassiveItem>();
                     passive.Init(itemData);
                 }
+                else if (level > 5)
+                {
+                    float nextPassiveValue = (itemData.upgradeDamages[level] / 10);
+
+                    passive.LevelUp(nextPassiveValue);
+                }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeDamages[level];
@@ -139,6 +187,12 @@ public class Item : MonoBehaviour
                     passive = newWeapon.AddComponent<PassiveItem>();
                     passive.Init(itemData);
                 }
+                else if (level > 5)
+                {
+                    float nextPassiveValue = (itemData.upgradeRange[level] / 10);
+
+                    passive.LevelUp(nextPassiveValue);
+                }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeRange[level];
@@ -156,6 +210,12 @@ public class Item : MonoBehaviour
                     passive = newWeapon.AddComponent<PassiveItem>();
                     passive.Init(itemData);
                 }
+                else if (level > 5)
+                {
+                    float nextPassiveValue = (itemData.upgradeCT[level] / 10);
+
+                    passive.LevelUp(nextPassiveValue);
+                }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeCT[level];
@@ -172,6 +232,12 @@ public class Item : MonoBehaviour
                     GameObject newWeapon = new GameObject();
                     passive = newWeapon.AddComponent<PassiveItem>();
                     passive.Init(itemData);
+                }
+                else if (level > 5)
+                {
+                    float nextPassiveValue = (itemData.upgradeMoveSpeed[level] / 10);
+
+                    passive.LevelUp(nextPassiveValue);
                 }
                 else
                 {
@@ -191,12 +257,22 @@ public class Item : MonoBehaviour
                     weapon.Init(itemData);
 
                 }
+                else if (level > 5)
+                {
+                    float nextDamage = weapon.damage;
+                    float nextRange = weapon.range;
+
+                    nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
+                    nextRange = weapon.range * (1 + (itemData.upgradeRange[level] / 10));
+
+                    weapon.LevelUp(nextDamage, nextRange);
+                }
                 else
                 {
                     float nextDamage = weapon.damage;
                     float nextRange = weapon.range;
 
-                    nextDamage = weapon.damage +  itemData.upgradeDamages[level];
+                    nextDamage = weapon.damage + itemData.upgradeDamages[level];
                     nextRange = weapon.range * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
@@ -212,6 +288,15 @@ public class Item : MonoBehaviour
                     weapon = newWeapon.AddComponent<Weapon>();
                     weapon.Init(itemData);
 
+                }
+                else if (level > 5)
+                {
+                    float nextDamage = weapon.damage;
+
+                    nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10)
+                        ;
+
+                    weapon.LevelUp(nextDamage, 1);
                 }
                 else
                 {

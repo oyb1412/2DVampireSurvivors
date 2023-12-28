@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour
         hp = maxHp;
         isLive = true;
         levelUp.Select(0);
+
+
         AudioManager.instance.PlayerBgm(true);
         ReStart();
 

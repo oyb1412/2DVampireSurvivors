@@ -14,20 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 9
   itemId: 8
-  itemDesc: "\uB370\uBBF8\uC9C0 {0} \uC99D\uAC00\n\uAD00\uD1B5\uB825 1 \uC99D\uAC00"
-  itemName: "\uC2ED\uC790\uAC00"
   itemIcon: {fileID: 21300000, guid: 5589094c98a2c9a4cbc7148f463a2f1b, type: 3}
+  itemDesc: "\uACF5\uACA9\uB825 {0} \uC99D\uAC00\n\uAD00\uD1B5\uB825 1 \uC99D\uAC00"
+  itemBaseDesc: "\uD68C\uC804\uD558\uBA70 \uC801\uC5D0\uAC8C \uB0A0\uC544\uAC00\uB294\n\uC2ED\uC790\uAC00"
   count: 10
-  damage: 10
-  range: 4
-  CT: 5
+  damage: 130
+  range: 600
+  CT: 500
   upgradeCT: []
   upgradeDamages:
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
+  - 7
+  - 7
+  - 7
+  - 7
+  - 7
   upgradeRange: []
   upgradeMoveSpeed: []
   weaponObject: {fileID: 3526572566768862289, guid: 58515f6a6594e474aa0872239dd76281, type: 3}

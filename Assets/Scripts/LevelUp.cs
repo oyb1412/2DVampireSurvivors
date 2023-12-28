@@ -55,14 +55,7 @@ public class LevelUp : MonoBehaviour
         for (int i = 0; i<ran.Length; i++)
         {
             Item item = items[ran[i]];
-
-            if (item.level == 5)
-            {
-                items[4].gameObject.SetActive(true);            }
-            else
-            {
-                item.gameObject.SetActive(true);
-            }
+            item.gameObject.SetActive(true);
         }
     }
 }

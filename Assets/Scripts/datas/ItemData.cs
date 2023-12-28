@@ -25,9 +25,11 @@ public class ItemData : ScriptableObject
     public ItemType itemType;
     public int itemId;
     [TextArea]
-    public string itemDesc;
-    public string itemName;
     public Sprite itemIcon;
+    [TextArea]
+    public string itemDesc;
+    [TextArea]
+    public string itemBaseDesc;
     public int count;
 
     [Header("Option Info")]

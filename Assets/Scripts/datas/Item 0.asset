@@ -14,20 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0
   itemId: 0
-  itemDesc: "\uB370\uBBF8\uC9C0 {0} \uC99D\uAC00\n\uBC94\uC704 {1}% \uC99D\uAC00\n"
-  itemName: "\uAC80"
   itemIcon: {fileID: 1140539933, guid: b559eab199145a24fae97f0ae7757563, type: 3}
+  itemDesc: "\uACF5\uACA9\uB825 {0} \uC99D\uAC00\n\uACF5\uACA9 \uBC94\uC704 {1}%
+    \uC99D\uAC00"
+  itemBaseDesc: "\uC8FC\uBCC0 \uC801\uC744 \uC6D0 \uD615\uD0DC\uB85C\n\uACF5\uACA9\uD558\uB294
+    \uAC80\n"
   count: 1
-  damage: 11
-  range: 1
-  CT: 2
+  damage: 100
+  range: 200
+  CT: 100
   upgradeCT: []
   upgradeDamages:
-  - 2
-  - 2
-  - 2
-  - 2
-  - 2
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
   upgradeRange:
   - 0.1
   - 0.1

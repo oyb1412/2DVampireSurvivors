@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
+    public float baseSpeed;
     Vector2 playerVec;
     public Vector2 inputVec;
     Rigidbody2D rigid;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
         spriter = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         scanner = GetComponent<Scanner>();
+        baseSpeed = speed;
     }
 
     // Update is called once per frame
@@ -42,7 +44,7 @@ public class Player : MonoBehaviour
 
         audioTimer += Time.deltaTime;
 
-        rigid.MovePosition(rigid.position + inputVec * speed);
+        rigid.MovePosition(rigid.position + inputVec * (Time.deltaTime * (speed / 10)) );
     }
 
  

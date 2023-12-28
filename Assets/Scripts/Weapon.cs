@@ -14,9 +14,13 @@ public class Weapon : MonoBehaviour
     float timer;
     float attackTimer;
     public float range;
+    public float baseRange;
+    public float baseCoolTime;
+    public float baseDamage;
     public ItemData data;
-    private void Awake()
+    private void Start()
     {
+
     }
     private void Update()
     {
@@ -57,10 +61,14 @@ public class Weapon : MonoBehaviour
 
     void FireMoonSlash()
     {
+        Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 dir = new Vector2(mouse.x - transform.position.y, mouse.y - transform.position.y);
         Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
         bullet.parent = GameObject.Find("Weapon0").transform;
-        bullet.transform.position = GameManager.instance.player.transform.position;
-        bullet.GetComponent<Bullet>().Init(damage, weaponType, Vector3.zero, count);
+        bullet.transform.position = GameManager.instance.player.transform.position + (dir.normalized * 1.5f);
+        bullet.transform.localScale = Vector3.one * range;
+        //bullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.GetComponent<Bullet>().Init(damage, id, dir.normalized, count);
     }
 
     void FireDagger()
@@ -132,8 +140,13 @@ public class Weapon : MonoBehaviour
         id = data.itemId;
         damage = data.damage;
         count = data.count;
-        range = data.range;
-        for(int i = 0; i<GameManager.instance.pool.prefabs.Length; i++)
+        range = data.range / 100;
+        coolTime = data.CT / 100;
+
+        baseRange = range;
+        baseCoolTime = coolTime;
+        baseDamage = damage;
+        for (int i = 0; i<GameManager.instance.pool.prefabs.Length; i++)
         {
             if(data.weaponObject == GameManager.instance.pool.prefabs[i])
             {
@@ -143,7 +156,6 @@ public class Weapon : MonoBehaviour
         }
 
 
-        coolTime = data.CT;
         weaponType = (int)data.itemType;
         switch (id)
         {
@@ -200,7 +212,7 @@ public class Weapon : MonoBehaviour
     void AutoRotate()
     {
            //z축을 기준으로 속도만큼 자동회전
-           transform.Rotate(Vector3.forward , 200f * Time.deltaTime);
+           transform.Rotate(Vector3.forward , (300f - (100 - (coolTime * 10))) * Time.deltaTime);
     }
 
 }

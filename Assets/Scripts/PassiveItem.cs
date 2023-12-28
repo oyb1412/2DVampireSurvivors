@@ -14,7 +14,21 @@ public class PassiveItem : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
         itemDate = data.itemType;
-        value = 0;
+        switch (itemDate)
+        {
+            case ItemData.ItemType.Damage:
+                value = data.upgradeDamages[0];
+                break;
+            case ItemData.ItemType.Range:
+                value = data.upgradeRange[0];
+                break;
+            case ItemData.ItemType.CoolTime:
+                value = data.upgradeCT[0];
+                break;
+            case ItemData.ItemType.MoveSpeed:
+                value = data.upgradeMoveSpeed[0];
+                break;
+        }
         ApplyPassive();
     }
 
@@ -30,13 +44,13 @@ public class PassiveItem : MonoBehaviour
 
         foreach (Weapon weapon in weapons)
         {
-            weapon.coolTime = weapon.coolTime - (value);
+            weapon.coolTime = weapon.baseCoolTime * (1 - value);
         }
     }
 
     void MoveUp()
     {
-        GameManager.instance.player.speed = GameManager.instance.player.speed + (1 * value);
+        GameManager.instance.player.speed = GameManager.instance.player.baseSpeed * (1 + value);
     }
 
     void DamageUp()
@@ -45,7 +59,7 @@ public class PassiveItem : MonoBehaviour
 
         foreach (Weapon weapon in weapons)
         {
-           weapon.damage = weapon.damage + value;
+           weapon.damage = weapon.baseDamage * (1 + value);
         }
     }
 
@@ -55,7 +69,9 @@ public class PassiveItem : MonoBehaviour
 
         foreach (Weapon weapon in weapons)
         {
-           weapon.range = weapon.range * (1 + value);
+            float basevalue = 1 + value;
+            Debug.Log(basevalue);
+            weapon.range = weapon.baseRange * (1 + value);
         }
     }
 
