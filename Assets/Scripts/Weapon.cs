@@ -12,16 +12,14 @@ public class Weapon : MonoBehaviour
     public int count =1;
     public int weaponType;
     float timer;
-    float attackTimer;
+    float chargeTimer;
+    bool chargeTrigger;
     public float range;
     public float baseRange;
     public float baseCoolTime;
     public float baseDamage;
     public ItemData data;
-    private void Start()
-    {
-
-    }
+    
     private void Update()
     {
         if (!GameManager.instance.isLive)
@@ -30,12 +28,30 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
-                attackTimer += Time.deltaTime;
-                if(attackTimer > coolTime)
+                if (Input.GetMouseButton(0) && timer > coolTime)
                 {
-                    attackTimer = 0;
-                    FireMoonSlash();
+                    if (chargeTimer < 10)
+                        chargeTimer += Time.deltaTime * 5;
+
+                    if(chargeTimer > 0.5f)
+                        GameManager.instance.player.ChargeaAnimation(true);
+
+
+                    chargeTrigger = true;
                 }
+                if (Input.GetMouseButtonUp(0) && timer > coolTime)
+                {
+                    GameManager.instance.player.ChargeaAnimation(false);
+                    chargeTrigger = false;
+
+                    timer = 0;
+                    FireMoonSlash();
+                    AudioManager.instance.PlayerSfx(AudioManager.Sfx.Sword);
+
+                }
+                if (!chargeTrigger)
+                    timer += Time.deltaTime;
+
                 break;
             case 1:
                 timer += Time.deltaTime;
@@ -61,14 +77,18 @@ public class Weapon : MonoBehaviour
 
     void FireMoonSlash()
     {
+        Vector2 playerPos = GameManager.instance.player.transform.position;
         Vector2 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 dir = new Vector2(mouse.x - transform.position.y, mouse.y - transform.position.y);
+        Vector3 dir = mouse - playerPos;
+        dir = dir.normalized;
         Transform bullet = GameManager.instance.pool.Get(prefabId).transform;
         bullet.parent = GameObject.Find("Weapon0").transform;
-        bullet.transform.position = GameManager.instance.player.transform.position + (dir.normalized * 1.5f);
-        bullet.transform.localScale = Vector3.one * range;
-        //bullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
-        bullet.GetComponent<Bullet>().Init(damage, id, dir.normalized, count);
+        bullet.transform.position = GameManager.instance.player.transform.position;
+        bullet.transform.rotation = Quaternion.FromToRotation(Vector3.up, dir);
+        bullet.transform.localScale = Vector3.one * (range + chargeTimer);
+        bullet.GetComponent<Bullet>().Init(damage + chargeTimer * 15, id, dir, count);
+        chargeTimer = 1;
+
     }
 
     void FireDagger()
@@ -138,7 +158,7 @@ public class Weapon : MonoBehaviour
         transform.localPosition = Vector3.zero;
 
         id = data.itemId;
-        damage = data.damage;
+        damage = data.damage / 10;
         count = data.count;
         range = data.range / 100;
         coolTime = data.CT / 100;

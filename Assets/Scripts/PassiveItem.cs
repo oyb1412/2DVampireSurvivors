@@ -70,7 +70,6 @@ public class PassiveItem : MonoBehaviour
         foreach (Weapon weapon in weapons)
         {
             float basevalue = 1 + value;
-            Debug.Log(basevalue);
             weapon.range = weapon.baseRange * (1 + value);
         }
     }

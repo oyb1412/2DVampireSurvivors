@@ -107,7 +107,7 @@ public class Item : MonoBehaviour
                 else if(level > 5)
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.range;
+                    float nextRange = weapon.baseRange;
 
                     nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
                     nextRange = weapon.range * (1 + (itemData.upgradeRange[level] / 10));
@@ -117,10 +117,10 @@ public class Item : MonoBehaviour
                 else
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.range;
+                    float nextRange = weapon.baseRange;
 
                     nextDamage = weapon.damage + itemData.upgradeDamages[level];
-                    nextRange = weapon.range * (1 + itemData.upgradeRange[level]);
+                    nextRange = weapon.baseRange * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
@@ -167,13 +167,13 @@ public class Item : MonoBehaviour
                 {
                     float nextPassiveValue = (itemData.upgradeDamages[level] / 10);
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeDamages[level];
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 iconObj[4].SetActive(true);
                 Text objDamage = iconObj[4].GetComponentInChildren<Text>();
@@ -191,13 +191,13 @@ public class Item : MonoBehaviour
                 {
                     float nextPassiveValue = (itemData.upgradeRange[level] / 10);
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeRange[level];
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 iconObj[5].SetActive(true);
                 Text objRange = iconObj[5].GetComponentInChildren<Text>();
@@ -214,13 +214,13 @@ public class Item : MonoBehaviour
                 {
                     float nextPassiveValue = (itemData.upgradeCT[level] / 10);
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeCT[level];
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 iconObj[6].SetActive(true);
                 Text objCT = iconObj[6].GetComponentInChildren<Text>();
@@ -237,13 +237,13 @@ public class Item : MonoBehaviour
                 {
                     float nextPassiveValue = (itemData.upgradeMoveSpeed[level] / 10);
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 else
                 {
                     float nextPassiveValue = itemData.upgradeMoveSpeed[level];
 
-                    passive.LevelUp(nextPassiveValue);
+                    passive.LevelUp(nextPassiveValue * level);
                 }
                 iconObj[7].SetActive(true);
                 Text objMove = iconObj[7].GetComponentInChildren<Text>();
@@ -260,20 +260,20 @@ public class Item : MonoBehaviour
                 else if (level > 5)
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.range;
+                    float nextRange = weapon.baseRange;
 
                     nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
-                    nextRange = weapon.range * (1 + (itemData.upgradeRange[level] / 10));
+                    nextRange = weapon.baseRange * (1 + (itemData.upgradeRange[level] / 10));
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
                 else
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.range;
+                    float nextRange = weapon.baseRange;
 
                     nextDamage = weapon.damage + itemData.upgradeDamages[level];
-                    nextRange = weapon.range * (1 + itemData.upgradeRange[level]);
+                    nextRange = weapon.baseRange * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
@@ -293,10 +293,10 @@ public class Item : MonoBehaviour
                 {
                     float nextDamage = weapon.damage;
 
-                    nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10)
-                        ;
+                    nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
 
-                    weapon.LevelUp(nextDamage, 1);
+
+                    weapon.LevelUp(nextDamage, 6);
                 }
                 else
                 {
@@ -304,7 +304,7 @@ public class Item : MonoBehaviour
 
                     nextDamage = weapon.damage + itemData.upgradeDamages[level];
 
-                    weapon.LevelUp(nextDamage, 1);
+                    weapon.LevelUp(nextDamage, 6);
                 }
                 iconObj[3].SetActive(true);
                 Text objCross = iconObj[3].GetComponentInChildren<Text>();
@@ -319,9 +319,9 @@ public class Item : MonoBehaviour
 
         level++;
         AudioManager.instance.PlayerSfx(AudioManager.Sfx.Select);
-        if (level == itemData.upgradeRange.Length)
-        {
-            GetComponent<Button>().interactable = false;
-        }
+        //if (level == itemData.upgradeRange.Length)
+        //{
+        //    GetComponent<Button>().interactable = false;
+        //}
     }
 }

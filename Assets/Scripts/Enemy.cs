@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
-    public float hp;
+    public float hp =1;
     public int maxHp;
     public bool isLive;
     public int enemyType;
@@ -32,6 +32,7 @@ public class Enemy : MonoBehaviour
         if (!GameManager.instance.isLive)
             return;
 
+ 
         //애너미가 죽은 상태거나 피격 상태면 함수 종료
         if (!isLive || animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
@@ -54,7 +55,7 @@ public class Enemy : MonoBehaviour
         animator.runtimeAnimatorController = controllers[data.SpriteType];
         speed = data.speed;
         maxHp = data.health;
-        hp = data.health;
+        hp = data.health + GameManager.instance.level;
     }
     //LateUpdate에 애너미 스프라이트의 반전상황과 관련된 코드 작성
     //애너미가 false상태면 함수 종료
@@ -67,6 +68,7 @@ public class Enemy : MonoBehaviour
         if (!isLive) 
             return;
 
+        
         spriter.flipX = nextVec.x > 0 ? false : true;
    
     }
@@ -75,7 +77,6 @@ public class Enemy : MonoBehaviour
     {
         playerRigid = GameManager.instance.player.GetComponent<Rigidbody2D>();
         hp = maxHp;
-
         isLive = true;
         col.enabled = true;
         rigid.simulated = true;
@@ -92,20 +93,17 @@ public class Enemy : MonoBehaviour
             return;
 
         //애너미의 체력을 불렛의 데미지만큼 감소
-        hp -= collision.GetComponent<Bullet>().damage;
         AudioManager.instance.PlayerSfx(AudioManager.Sfx.Hit);
-
-  
         if (hp > 0)
         {
-            animator.SetTrigger("Hit");
-            StartCoroutine(KnockBack());
+            StartCoroutine(HitRoutine(collision));
         }
-        else
+        if (hp <= 0)
         {
-           dropItem.Create(enemyType,transform.position);
-           StartCoroutine(EnemyDead());
+            dropItem.Create(enemyType, transform.position);
+            StartCoroutine(EnemyDead());
         }
+
 
     }
 
@@ -126,7 +124,7 @@ public class Enemy : MonoBehaviour
     }
 
     //넉백을 위한 코루틴 함수
-    IEnumerator KnockBack()
+    IEnumerator HitRoutine(Collider2D index)
     {
         //플레이어 포지션 보관
         Vector3 playerPos = GameManager.instance.player.transform.position;
@@ -134,11 +132,13 @@ public class Enemy : MonoBehaviour
         //애너미의 반대 방향 벡터 보관
         Vector3 backVec = transform.position - playerPos;
 
+        hp -= index.GetComponent<Bullet>().damage;
+        animator.SetTrigger("Hit");
         //리지드에 힘을 가함(정규화 후) ForceMode2D.Impulse는 타격,폭발처럼 순간적인 힘을 나타낼때 사용
         rigid.AddForce(backVec.normalized * 0.2f, ForceMode2D.Impulse);
 
         //1프레임 쉬기
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.15f);
     }
 
 

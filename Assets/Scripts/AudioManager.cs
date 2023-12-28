@@ -25,16 +25,20 @@ public class AudioManager : MonoBehaviour
         Lose,
         Select,
         Victory,
-        PlayerHit
+        PlayerHit,
+        Charge,
+        Sword
     }
     private void Awake()
     {
         instance = this;
         bgmFilter = Camera.main.GetComponent<AudioHighPassFilter>();
         bgmFilter.enabled = false;
+    }
+    private void Start()
+    {
         Init();
     }
-
     void Init()
     {
         //BGM
@@ -56,6 +60,8 @@ public class AudioManager : MonoBehaviour
             sfxPlayers[i].loop = false;
             sfxPlayers[i].volume = sfxVolume;
             sfxPlayers[i].bypassListenerEffects = false;
+ 
+
         }
     }
 

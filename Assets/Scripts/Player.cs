@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     SpriteRenderer spriter;
     Animator animator;
     public Scanner scanner;
+
     float audioTimer = 0;
     // Start is called before the first frame update
     void Start()
@@ -72,5 +73,10 @@ public class Player : MonoBehaviour
             animator.SetTrigger("Dead");
             GameManager.instance.GameOver();
         }
+    }
+
+    public void ChargeaAnimation(bool index)
+    {
+        animator.SetBool("Charge", index);
     }
 }

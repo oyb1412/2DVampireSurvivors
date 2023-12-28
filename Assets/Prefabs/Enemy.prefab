@@ -203,6 +203,8 @@ MonoBehaviour:
   - {fileID: 9100000, guid: 8ecee1e8246316d4c975a8f9f0d3f9d7, type: 2}
   - {fileID: 22100000, guid: 0fe1699b8fdb33e47a92b9c199c60ddb, type: 2}
   - {fileID: 22100000, guid: 82e928076a4aee240a9258d6b29db9dc, type: 2}
+  - {fileID: 22100000, guid: 5beede1b057a12a448ac0e7b31c55cd5, type: 2}
+  - {fileID: 22100000, guid: 53d385bd8c6236e4eaa37dbbeec5be02, type: 2}
   - {fileID: 22100000, guid: b19cae7c0d906b340ac71738cbbc2ee6, type: 2}
   dropItem: {fileID: 1954990492130331159, guid: 84f7ea458f3349d43b81f0a3a1e79a95, type: 3}
 --- !u!114 &6875542258151570705

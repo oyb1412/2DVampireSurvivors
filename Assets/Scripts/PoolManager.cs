@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
     public GameObject[] prefabs;
-    List<GameObject>[] poolList;
+    public List<GameObject>[] poolList;
 
     void Start()
     {
@@ -22,18 +22,18 @@ public class PoolManager : MonoBehaviour
     public GameObject Get(int index)
     {
         GameObject obj = null;
-        //오브젝트 풀링으로 생성된 모든 오브젝트를 검사
-        foreach (GameObject item in poolList[index])
-        {
-            // 비활성화 된(재활용 가능한)오브젝트가 있다면
-            if (!item.activeSelf)
+            //오브젝트 풀링으로 생성된 모든 오브젝트를 검사
+            foreach (GameObject item in poolList[index])
             {
-                obj = item;// 재활용
-                obj.SetActive(true); // 활성화
-                break;// 함수 종료
+                // 비활성화 된(재활용 가능한)오브젝트가 있다면
+                if (!item.activeSelf)
+                {
+                    obj = item;// 재활용
+                    obj.SetActive(true); // 활성화
+                    break;// 함수 종료
+                }
             }
-        }
-
+        
         //재활용 가능한 오브젝트가 없다면
         if (!obj)
         {

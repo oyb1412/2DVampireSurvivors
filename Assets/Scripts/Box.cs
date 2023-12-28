@@ -9,28 +9,18 @@ public class Box : MonoBehaviour
     public DropItem dropItem;
     private void Awake()
     {
-        ranNumber = Random.Range(0, 10);
+        ranNumber = Random.Range(0, 7);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("Bullet"))
             return;
 
-        if(ranNumber == 8) //磊籍 
+        if(ranNumber  == 2)  //各 力芭
         {
-            dropItem.Create(ranNumber, transform.position);
+            dropItem.Create(8, transform.position);
         }
-        else if(ranNumber == 9) //各 力芭
-        {
-            dropItem.Create(ranNumber, transform.position);
-        }
-        else if(ranNumber == 10) // 公利
-        {
-            dropItem.Create(ranNumber, transform.position);
-        }
-
+        GameManager.instance.hp += 3;
         gameObject.SetActive(false);
-
-
     }
 }

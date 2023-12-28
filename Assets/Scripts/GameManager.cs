@@ -30,23 +30,27 @@ public class GameManager : MonoBehaviour
 
     public Restart restartUi;
     public GameObject EnemyCleaner;
-    public AssignBox boxManager;
+    public AssignBox assingBox;
     // Start is called before the first frame update
     private void Awake()
     {
         instance = this;
-        
+
     }
 
+    private void Start()
+    {
+
+    }
     public void GameStart()
     {
         hp = maxHp;
         isLive = true;
         levelUp.Select(0);
 
-
         AudioManager.instance.PlayerBgm(true);
         ReStart();
+        assingBox.BoxInit(60);
 
     }
     public void GameVictory()
@@ -84,7 +88,7 @@ public class GameManager : MonoBehaviour
     public void GameRetry()
     {
         AudioManager.instance.PlayerSfx(AudioManager.Sfx.Select);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     private void Update()

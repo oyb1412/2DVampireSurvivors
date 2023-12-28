@@ -22,19 +22,26 @@ public class DropItem : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
+    private void OnEnable()
+    {
+        trigger = false;
+    }
     // Update is called once per frame
     void Update()
     {
         Vector3 playerPos = GameManager.instance.player.transform.position;
-        if ((playerPos - transform.position).magnitude < 1f)
+        if ((playerPos - transform.position).magnitude < 2f)
             trigger = true;
 
-        Vector2 nextPos = (playerPos - transform.position).normalized * 20f;
+        
+           Vector2 nextPos = (playerPos - transform.position).normalized;
 
-        if(trigger)
-            rigid.MovePosition(rigid.position + nextPos * Time.deltaTime);
+            if (trigger)
+                rigid.MovePosition(rigid.position + nextPos * Time.deltaTime * 100f);
+        
 
-        if ((playerPos - transform.position).magnitude < 0.05f)
+
+        if ((playerPos - transform.position).magnitude < 0.1f)
         {
             switch (enemyType)
             {
@@ -49,14 +56,7 @@ public class DropItem : MonoBehaviour
                     break;
 
                 case EnemyType.Destroy:
-                    gameObject.SetActive(false);
-                    break;
-
-                case EnemyType.Pull:
-                    gameObject.SetActive(false);
-                    break;
-
-                case EnemyType.Invincibilit:
+                    GameManager.instance.pool.Get(11);
                     gameObject.SetActive(false);
                     break;
             }
@@ -72,7 +72,10 @@ public class DropItem : MonoBehaviour
                 GameObject eleteItem = GameManager.instance.pool.Get(1);
                 eleteItem.transform.position = pos;
                 break;
-          
+            case 8:
+                GameObject destroyItem = GameManager.instance.pool.Get(8);
+                destroyItem.transform.position = pos;
+                break;
             default:
                 GameObject normalItem = GameManager.instance.pool.Get(5);
                 normalItem.transform.position = pos;
