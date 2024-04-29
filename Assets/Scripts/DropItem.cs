@@ -26,19 +26,18 @@ public class DropItem : MonoBehaviour
     {
         trigger = false;
     }
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         Vector3 playerPos = GameManager.instance.player.transform.position;
         if ((playerPos - transform.position).magnitude < 2f)
             trigger = true;
 
-        
-           Vector2 nextPos = (playerPos - transform.position).normalized;
 
-            if (trigger)
-                rigid.MovePosition(rigid.position + nextPos * Time.deltaTime * 100f);
-        
+        Vector2 nextPos = (playerPos - transform.position).normalized;
+
+        if (trigger)
+            rigid.MovePosition(rigid.position + nextPos * 10f * Time.fixedDeltaTime);
+
 
 
         if ((playerPos - transform.position).magnitude < 0.1f)
@@ -61,8 +60,8 @@ public class DropItem : MonoBehaviour
                     break;
             }
         }
-
     }
+
 
     public void Create(int index, Vector3 pos)
     {

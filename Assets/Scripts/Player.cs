@@ -45,7 +45,7 @@ public class Player : MonoBehaviour
 
         audioTimer += Time.deltaTime;
 
-        rigid.MovePosition(rigid.position + inputVec * (Time.deltaTime * (speed / 10)) );
+        rigid.MovePosition(rigid.position + inputVec * (Time.fixedDeltaTime * (speed / 10)) );
     }
 
  
