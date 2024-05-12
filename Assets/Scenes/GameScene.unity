@@ -4474,9 +4474,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: a4086b0a51b1d0b449ece83d8b46335d, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -5504,9 +5501,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a945adb7fd4a743a28f7a107cb5cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1000
-  weaponType: -1
-  count: 0
 --- !u!61 &310996090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5893,9 +5887,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  baseSpeed: 0
-  inputVec: {x: 0, y: 0}
-  scanner: {fileID: 0}
 --- !u!95 &403641437
 Animator:
   serializedVersion: 5
@@ -5933,7 +5924,6 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
-  target: {fileID: 0}
 --- !u!1 &409983219
 GameObject:
   m_ObjectHideFlags: 0
@@ -6068,9 +6058,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: cc269fd3aa05ee74e82c551b9a5df7fd, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -6428,9 +6415,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 3697bed259b8d5a4f9c8cd8afc8ec2b7, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -7365,8 +7349,7 @@ MonoBehaviour:
     SpriteType: 5
     health: 40
     speed: 2.5
-  eleteSpawn: 15
-  gameLevel: 0
+  eleteTimer: 0
 --- !u!1 &589752752
 GameObject:
   m_ObjectHideFlags: 0
@@ -7981,9 +7964,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 74d743d6db1af194e971d854cc9ac9a3, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -8229,9 +8209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: fb517817911201448b78309ae1342013, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -9474,9 +9451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 1cfe562d3fb2be74fba23468fbacd2cd, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -9876,9 +9850,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: 2ad3781809198e84397b52eef6ecee4b, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -11510,48 +11481,12 @@ MonoBehaviour:
   player: {fileID: 403641436}
   pool: {fileID: 961959250}
   levelUp: {fileID: 1375081383}
-  curTime: 0
-  minTime: 0
-  kill: 0
-  exp: 0
-  maxExp:
-  - 5
-  - 10
-  - 15
-  - 20
-  - 25
-  - 30
-  - 40
-  - 45
-  - 50
-  - 55
-  - 60
-  - 65
-  - 70
-  - 70
-  - 70
-  - 70
-  - 75
-  - 75
-  - 75
-  - 80
-  - 80
-  - 80
-  - 80
-  - 80
-  - 85
-  - 85
-  - 85
-  - 85
-  - 85
-  - 85
-  level: 0
-  hp: 0
-  maxHp: 100
-  isLive: 0
   restartUi: {fileID: 332208544}
   EnemyCleaner: {fileID: 310996088}
   assingBox: {fileID: 2117806167}
+  hp: 0
+  exp: 0
+  <MaxHp>k__BackingField: 50
 --- !u!1 &1350642264
 GameObject:
   m_ObjectHideFlags: 0
@@ -11768,7 +11703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 314238d65afb8a34e8afb93b9f96083b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
 --- !u!212 &1375081384
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -11832,7 +11766,6 @@ GameObject:
   - component: {fileID: 1397695595}
   - component: {fileID: 1397695594}
   - component: {fileID: 1397695597}
-  - component: {fileID: 1397695596}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -11854,8 +11787,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmClip: {fileID: 8300000, guid: 51a4f1157b7ff1449b5e5cf064d584c7, type: 3}
   bgmVolume: 0.5
-  bgmPlayer: {fileID: 0}
-  bgmFilter: {fileID: 0}
   sfxClips:
   - {fileID: 8300000, guid: 81af10a039e35e843b176722222f5451, type: 3}
   - {fileID: 8300000, guid: f5086e69c398eec4d85a254455dc3d43, type: 3}
@@ -11867,8 +11798,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f068e91010af92f4baac619e467fb877, type: 3}
   - {fileID: 8300000, guid: 062fa41880115b0449f98503b60e931c, type: 3}
   sfxVolume: 0.7
-  chanels: 16
-  sfxPlayers: []
 --- !u!4 &1397695595
 Transform:
   m_ObjectHideFlags: 0
@@ -11884,27 +11813,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1397695596
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1397695593}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4029f35ba57573647a3ca82323bb3262, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1397695597
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -13102,9 +13010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: d6e44b8792a94254db31a2743cdc4fc4, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}
@@ -23329,9 +23234,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: f28b4f57ac6ec1942a36ed9b533d484f, type: 2}
-  level: 0
-  weapon: {fileID: 0}
-  passive: {fileID: 0}
   iconObj:
   - {fileID: 828107416}
   - {fileID: 1618550474}

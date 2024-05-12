@@ -1,35 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Scanner : MonoBehaviour
 {
     //스캔 범위
-    public float scanRange;
+    [SerializeField]private float scanRange;
     //스캔할 대상의 레이어마스크
-    public LayerMask layer;
+    [SerializeField] private LayerMask layer;
     //레이캐스트가 히트한 대상(스캔한 대상)을 저장할 배열
-    public RaycastHit2D[] targets;
+    private RaycastHit2D[] targets;
     //가장 가까운 대상
-    public Transform target;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    public Transform Target { get; private set; }
 
     private void FixedUpdate()
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.IsLive)
             return;
 
         //원형의 캐스트를 쏘고 모든 결과를 반환하는 함수 (1.캐스팅 시작 위치 2.원의 반지름 3.캐스팅 방향 4.쏘는 방향의 길이 5.대상 레이어 )
         targets = Physics2D.CircleCastAll(transform.position, scanRange, Vector2.zero, 0f, layer);
-        target = GetTarget();
+        Target = GetTarget();
     }
 
+    /// <summary>
+    /// 가장 가까운 적을 반환
+    /// </summary>
+    /// <returns>가장 가까운 적</returns>
     Transform GetTarget()
     {
         Transform result = null;
@@ -54,7 +49,6 @@ public class Scanner : MonoBehaviour
             }
 
         }
-
 
         return result;
     }    

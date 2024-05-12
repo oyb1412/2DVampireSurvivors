@@ -1,37 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
+/// <summary>
+/// 애너미 스폰 관리
+/// </summary>
 public class Spawner : MonoBehaviour
 {
+    #region Variable
     //스폰 포인트를 랜덤으로 하기 위해 자식 오브젝트로 여러개 설정. 저장하기 위한 배열 변수
-    public Transform[] spawnerPoint;
-    public SpawnDate[] spawnDate;
-    public float eleteSpawn = 5;
+    [SerializeField]private Transform[] spawnerPoint;
+    [SerializeField]private SpawnDate[] spawnDate;
+    [SerializeField] private float eleteTimer;
+
+    private float eleteSpawn = 5;
     //애너미의 스폰율을 조정하기 위한 타이머
-    float timer;
-    float eleteTimer;
-    public int gameLevel = 0;
-    // Start is called before the first frame update
+    private float timer;
+    private int gameLevel = 0;
+
+    #endregion
+
     void Start()
     {
         //자식 오브젝트로 초기화
         spawnerPoint = GetComponentsInChildren<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.IsLive)
             return;
 
-        gameLevel = Mathf.Min(GameManager.instance.minTime , spawnDate.Length - 2);
+        gameLevel = Mathf.Min(GameManager.instance.MinTime , spawnDate.Length - 2);
         Spawn();
     }
-    //게임레벨로 몹 소환
-    //
+    
+    /// <summary>
+    /// 애너미 스폰
+    /// </summary>
     void Spawn()
     {
         timer += Time.deltaTime;
@@ -58,6 +62,9 @@ public class Spawner : MonoBehaviour
     }
 }
 
+/// <summary>
+/// 스폰 애너미 데이터
+/// </summary>
 [System.Serializable]
 public class SpawnDate
 {

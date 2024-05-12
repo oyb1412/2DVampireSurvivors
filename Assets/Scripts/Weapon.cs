@@ -1,28 +1,63 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int id;
-    public int prefabId;
+    [Header("Status")]
+    public float range;
     public float damage;
     public float coolTime;
-    public int count =1;
-    public int weaponType;
-    float timer;
-    float chargeTimer;
-    bool chargeTrigger;
-    public float range;
-    public float baseRange;
-    public float baseCoolTime;
-    public float baseDamage;
-    public ItemData data;
-    
+
+    private int id;
+    private int prefabId;
+    private int count =1;
+    private int weaponType;
+    private float timer;
+    private float chargeTimer;
+    private bool chargeTrigger;
+    public float BaseRange { get; private set; }
+    public float BaseCoolTime { get; private set; }
+    public float BaseDamage { get; private set; }
+    /// <summary>
+    /// 무기 초기화
+    /// </summary>
+    /// <param name="data"></param>
+    public void Init(ItemData data) {
+        name = "Weapon" + data.itemId;
+        transform.parent = GameManager.instance.player.transform;
+        transform.localPosition = Vector3.zero;
+
+        id = data.itemId;
+        damage = data.damage / 10;
+        count = data.count;
+        range = data.range / 100;
+        coolTime = data.CT / 100;
+
+        BaseRange = range;
+        BaseCoolTime = coolTime;
+        BaseDamage = damage;
+        for (int i = 0; i < GameManager.instance.pool.prefabs.Length; i++) {
+            if (data.weaponObject == GameManager.instance.pool.prefabs[i]) {
+                prefabId = i;
+                break;
+            }
+        }
+
+        weaponType = (int)data.itemType;
+        switch (id) {
+            case 7:
+                Assign();
+                break;
+        }
+
+        GameManager.instance.player.BroadcastMessage("ApplyPassive", SendMessageOptions.DontRequireReceiver);
+    }
+
+    /// <summary>
+    /// 각 무기에 따른 동작
+    /// </summary>
     private void Update()
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.IsLive)
             return;
 
         switch (id)
@@ -46,7 +81,7 @@ public class Weapon : MonoBehaviour
 
                     timer = 0;
                     FireMoonSlash();
-                    AudioManager.instance.PlayerSfx(AudioManager.Sfx.Sword);
+                    AudioManager.instance.PlaySfx(AudioManager.Sfx.Sword);
 
                 }
                 if (!chargeTrigger)
@@ -75,6 +110,9 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// MoonShash 발사
+    /// </summary>
     void FireMoonSlash()
     {
         Vector2 playerPos = GameManager.instance.player.transform.position;
@@ -91,15 +129,18 @@ public class Weapon : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Dagger 발사
+    /// </summary>
     void FireDagger()
     {
         //스캐너에 걸린 애너미가 없으면 함수 종료
-        if (!GameManager.instance.player.scanner.target)
+        if (!GameManager.instance.player.Scanner.Target)
             return;
         //플레이어 포지션
         Vector3 playerPos = GameManager.instance.player.transform.position;
         //스캐너에 걸린 애너미 위치 
-        Vector3 targetPos = GameManager.instance.player.scanner.target.position;
+        Vector3 targetPos = GameManager.instance.player.Scanner.Target.position;
         //플레이어->애너미 벡터 저장후 정규화
         Vector3 vecDir = targetPos - playerPos;
         vecDir = vecDir.normalized;
@@ -117,15 +158,18 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Bullet>().Init(damage, weaponType, vecDir, count);
     }
 
+    /// <summary>
+    /// Cross 발사
+    /// </summary>
     void FireCross()
     {
         //스캐너에 걸린 애너미가 없으면 함수 종료
-        if (!GameManager.instance.player.scanner.target)
+        if (!GameManager.instance.player.Scanner.Target)
             return;
         //플레이어 포지션
         Vector3 playerPos = GameManager.instance.player.transform.position;
         //스캐너에 걸린 애너미 위치 
-        Vector3 targetPos = GameManager.instance.player.scanner.target.position;
+        Vector3 targetPos = GameManager.instance.player.Scanner.Target.position;
         //플레이어->애너미 벡터 저장후 정규화
         Vector3 vecDir = targetPos - playerPos;
         vecDir = vecDir.normalized;
@@ -139,6 +183,10 @@ public class Weapon : MonoBehaviour
         bullet.GetComponent<Bullet>().Init(damage, id, vecDir, count);
 
     }
+
+    /// <summary>
+    /// 레벨업 시 웨펀 능력치 증가
+    /// </summary>
     public void LevelUp(float damage, float range)
     {
         this.damage = damage;
@@ -147,42 +195,6 @@ public class Weapon : MonoBehaviour
 
         if (id == 7)
             Assign();
-
-        GameManager.instance.player.BroadcastMessage("ApplyPassive", SendMessageOptions.DontRequireReceiver);
-    }
-
-    public void Init(ItemData data)
-    {
-        name = "Weapon" + data.itemId;
-        transform.parent = GameManager.instance.player.transform;
-        transform.localPosition = Vector3.zero;
-
-        id = data.itemId;
-        damage = data.damage / 10;
-        count = data.count;
-        range = data.range / 100;
-        coolTime = data.CT / 100;
-
-        baseRange = range;
-        baseCoolTime = coolTime;
-        baseDamage = damage;
-        for (int i = 0; i<GameManager.instance.pool.prefabs.Length; i++)
-        {
-            if(data.weaponObject == GameManager.instance.pool.prefabs[i])
-            {
-                prefabId = i;
-                break;
-            }
-        }
-
-
-        weaponType = (int)data.itemType;
-        switch (id)
-        {
-            case 7:
-                Assign();
-                break;
-        }
 
         GameManager.instance.player.BroadcastMessage("ApplyPassive", SendMessageOptions.DontRequireReceiver);
     }
@@ -222,17 +234,12 @@ public class Weapon : MonoBehaviour
             //불렛의 초기화 진행
             bullet.GetComponent<Bullet>().Init(damage, id, Vector3.zero, count);
         }
-
-
     }
 
-
-
-    //무기 자동회전 함수
+    //무기 자동회전
     void AutoRotate()
     {
            //z축을 기준으로 속도만큼 자동회전
            transform.Rotate(Vector3.forward , (300f - (100 - (coolTime * 10))) * Time.deltaTime);
     }
-
 }

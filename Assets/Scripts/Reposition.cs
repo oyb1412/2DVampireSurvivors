@@ -1,7 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어 이동에 따른 맵 및 애너미 강제이동
+/// </summary>
 public class Reposition : MonoBehaviour
 {
     //오브젝트간 충돌에서 벗어날때 호출되는 함수
@@ -24,7 +25,7 @@ public class Reposition : MonoBehaviour
         curDiff.y = Mathf.Abs(playerPos.y - tilePos.y);
 
         //플레이어 방향 저장
-        Vector2 playerVec = GameManager.instance.player.inputVec;
+        Vector2 playerVec = GameManager.instance.player.InputVec;
 
         //플레이어 방향을 근거로 타일맵의 이동경로 상하좌우를 1,-1로 저장
         float dirX = playerVec.x > 0 ? 1 : -1;
@@ -61,8 +62,4 @@ public class Reposition : MonoBehaviour
                 break;
         }
     }
-
-
- 
-
 }

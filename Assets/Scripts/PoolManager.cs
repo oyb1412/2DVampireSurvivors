@@ -1,7 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 풀링 오브젝트
+/// </summary>
 public class PoolManager : MonoBehaviour
 {
     public GameObject[] prefabs;

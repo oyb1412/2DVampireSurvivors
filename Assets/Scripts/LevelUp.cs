@@ -1,23 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어 레벨업 시 UI호출
+/// </summary>
 public class LevelUp : MonoBehaviour
 {
-    public Item[] items;
-    RectTransform rect;
-    // Start is called before the first frame update
+    //자식 UI 판넬 목록
+    private Item[] items;
+    
+    private RectTransform rect;
+
     private void Awake()
     {
         rect = GetComponent<RectTransform>();
         items = GetComponentsInChildren<Item>(true);
     }
 
+    /// <summary>
+    /// 아이템 선택
+    /// </summary>
+    /// <param name="index"></param>
     public void Select(int index)
     {
         items[index].OnClick();
     }
 
+    /// <summary>
+    /// 레벨업 시 UI호출
+    /// </summary>
     public void Show()
     {
         rect.localScale = Vector3.one;
@@ -26,6 +36,9 @@ public class LevelUp : MonoBehaviour
         GameManager.instance.Stop();
     }
 
+    /// <summary>
+    /// UI Hide
+    /// </summary>
     public void Hide()
     {
         rect.localScale = Vector3.zero;
@@ -33,6 +46,9 @@ public class LevelUp : MonoBehaviour
         GameManager.instance.ReStart();
     }
 
+    /// <summary>
+    /// 레벨업 시 중복되지않는 랜덤 아이템 표시
+    /// </summary>
     public void RandomItem()
     {
         foreach (Item item in items)

@@ -1,22 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 아이템 드롭 데이터 관리
+/// </summary>
 public class DropItem : MonoBehaviour
 {
-    Rigidbody2D rigid;
-    public enum EnemyType
-    {
+    public enum EnemyType {
         Normal,
         Elete,
         Destroy,
         Invincibilit,
         Pull
     }
-    bool trigger;
-    public EnemyType enemyType;
-    // Start is called before the first frame update
+
+    [SerializeField]private EnemyType enemyType;
+
+    private Rigidbody2D rigid;
+
+    //플레이어 자석효과 발동가능 여부
+    private bool trigger;
+
+    #region InitMethod
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -26,24 +30,29 @@ public class DropItem : MonoBehaviour
     {
         trigger = false;
     }
+    #endregion
+
+
     private void FixedUpdate()
     {
+        Magnetic();
+    }
+
+    /// <summary>
+    /// 플레이어와 가까워질시 플레이어에 빨려들어가는 기능
+    /// </summary>
+    private void Magnetic() {
         Vector3 playerPos = GameManager.instance.player.transform.position;
         if ((playerPos - transform.position).magnitude < 2f)
             trigger = true;
-
 
         Vector2 nextPos = (playerPos - transform.position).normalized;
 
         if (trigger)
             rigid.MovePosition(rigid.position + nextPos * 10f * Time.fixedDeltaTime);
 
-
-
-        if ((playerPos - transform.position).magnitude < 0.1f)
-        {
-            switch (enemyType)
-            {
+        if ((playerPos - transform.position).magnitude < 0.1f) {
+            switch (enemyType) {
                 case EnemyType.Normal:
                     GameManager.instance.exp++;
                     gameObject.SetActive(false);
@@ -62,7 +71,11 @@ public class DropItem : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// 아이템 드랍 메소드
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="pos"></param>
     public void Create(int index, Vector3 pos)
     {
         switch (index)

@@ -1,13 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 텍스트에 플래쉬효과 부여
+/// </summary>
 public class FlashText : MonoBehaviour
 {
-    Text text;
-    string saveText;
-    // Start is called before the first frame update
+    private Text text;
+    private string saveText;
+
     private void Awake()
     {
         text = GetComponent<Text>();
@@ -15,23 +17,16 @@ public class FlashText : MonoBehaviour
         StartCoroutine(Flash());
     }
 
+    /// <summary>
+    /// 텍스트 점멸 효과
+    /// </summary>
     IEnumerator Flash()
     {
         while (true)
         {
-
             text.text = "";
-
-
-
             yield return new WaitForSeconds(0.3f);
-
-
-
             text.text = saveText;
-
-
-
             yield return new WaitForSeconds(0.3f);
         }
     }

@@ -1,24 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 발사체 관리 클래스
+/// </summary>
 public class Bullet : MonoBehaviour
 {
-    public float damage;
-    public float weaponType;
-    public int count;
-    float deleteTimer;
-    Rigidbody2D rigid;
+    public float Damage { get; private set; }
+    private float weaponType;
 
+    // 관통력
+    private int count;
+    private Rigidbody2D rigid;
+
+    #region InitMethod
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// 발사체 생성 시 초기화
+    /// </summary>
+    /// <param name="damage">데미지</param>
+    /// <param name="weaponType">발사체 타입</param>
+    /// <param name="dirVec">날아갈 방향</param>
+    /// <param name="count">관통력</param>
     public void Init(float damage, float weaponType, Vector3 dirVec, int count)
     {
-        this.damage = damage / 10;
+        Damage = damage / 10;
         this.weaponType = weaponType;
         this.count = count;
 
@@ -35,12 +44,18 @@ public class Bullet : MonoBehaviour
      
     }
 
+    /// <summary>
+    /// 풀링 오브젝트로 인해 발사체 재활성화시 초기화
+    /// </summary>
     private void OnEnable()
     {
         transform.position = GameManager.instance.player.transform.position;
     }
+    #endregion
+
     private void Update()
     {
+        //무기에 따른 다른 행동 반복
         switch(weaponType)
         {
             case 0:
@@ -71,11 +86,9 @@ public class Bullet : MonoBehaviour
             //불렛 오브젝트 비활성화
             gameObject.SetActive(false);
         }
-
     }
 
-    public void ExoplotionEnd()
-    {
+    public void ExoplotionEnd() {
         gameObject.SetActive(false);
     }
 }

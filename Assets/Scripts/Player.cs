@@ -1,67 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// 플레이어 데이터 관리
+/// </summary>
 public class Player : MonoBehaviour
 {
+    #region Variable
     public float speed;
-    public float baseSpeed;
-    Vector2 playerVec;
-    public Vector2 inputVec;
-    Rigidbody2D rigid;
-    SpriteRenderer spriter;
-    Animator animator;
-    public Scanner scanner;
+    private float audioTimer = 0;
+    private Rigidbody2D rigid;
+    private SpriteRenderer spriter;
+    private Animator animator;
+    public float BaseSpeed { get; private set; }
+    public Vector2 InputVec { get; private set; }
+    public Scanner Scanner { get; private set; }
 
-    float audioTimer = 0;
-    // Start is called before the first frame update
+    #endregion
+
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        scanner = GetComponent<Scanner>();
-        baseSpeed = speed;
+        Scanner = GetComponent<Scanner>();
+        BaseSpeed = speed;
     }
 
-    // Update is called once per frame
+    #region UpdateMethod
     void Update()
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.IsLive)
             return;
 
-        inputVec.x = Input.GetAxisRaw("Horizontal");
-        inputVec.y = Input.GetAxisRaw("Vertical");
+        InputVec = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if(inputVec.x != 0)
-            spriter.flipX = inputVec.x > 0;
+        if(InputVec.x != 0)
+            spriter.flipX = InputVec.x > 0;
     }
 
     private void FixedUpdate()
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.IsLive)
             return;
 
         audioTimer += Time.deltaTime;
 
-        rigid.MovePosition(rigid.position + inputVec * (Time.fixedDeltaTime * (speed / 10)) );
+        //리지드바디 이동
+        rigid.MovePosition(rigid.position + InputVec * (Time.fixedDeltaTime * (speed / 10)) );
     }
 
- 
-
+    /// <summary>
+    /// 애너미와의 충돌 계산
+    /// </summary>
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (!GameManager.instance.isLive || !collision.gameObject.CompareTag("Enemy"))
+        if (!GameManager.instance.IsLive || !collision.gameObject.CompareTag("Enemy"))
             return;
-
 
         if(audioTimer >0.5f)
         {
             //피격효과음 실행
-            AudioManager.instance.PlayerSfx(AudioManager.Sfx.PlayerHit);
+            AudioManager.instance.PlaySfx(AudioManager.Sfx.PlayerHit);
             audioTimer = 0;
         }
+
         GameManager.instance.hp -= 10f * Time.deltaTime;
 
         if (GameManager.instance.hp < 0)
@@ -74,7 +76,11 @@ public class Player : MonoBehaviour
             GameManager.instance.GameOver();
         }
     }
+    #endregion
 
+    /// <summary>
+    /// 애니메이션 변경
+    /// </summary>
     public void ChargeaAnimation(bool index)
     {
         animator.SetBool("Charge", index);

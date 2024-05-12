@@ -1,19 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 레벨업 시 선택 가능한 아이템 데이터 관리
+/// </summary>
 public class Item : MonoBehaviour
 {
-    public ItemData itemData;
-    public int level;
-    public Weapon weapon;
-    public PassiveItem passive;
-    Image iconImage;
-    Text levelText;
-    Text descText;
-    public GameObject[] iconObj;
+    #region Variable
+    //아이템의 데이터(스크립터블 오브젝트)
+    [SerializeField]private ItemData itemData;
+    //현재 아이템의 레벨
+    private int level;
+    private Weapon weapon;
+    private PassiveItem passive;
+    private Image iconImage;
+    private Text levelText;
+    private Text descText;
+    [SerializeField]private GameObject[] iconObj;
+    #endregion
+
+    #region InitMethod
     private void Awake()
     {
         iconImage = GetComponentsInChildren<Image>()[1];
@@ -24,6 +30,9 @@ public class Item : MonoBehaviour
         iconImage.sprite = itemData.itemIcon;
     }
 
+    /// <summary>
+    /// UI활성화시, 아이템 타입에 맞는 정보를 itemData에서 추출해 UI에 표기
+    /// </summary>
     private void OnEnable()
     {
         levelText.text = "Lv." + (level + 1);
@@ -90,9 +99,11 @@ public class Item : MonoBehaviour
             }
         }
     }
+    #endregion
 
-
-
+    /// <summary>
+    /// UI활성화 상태에서 아이템 선택 시, 선택한 아이템 업그레이드
+    /// </summary>
     public void OnClick()
     {
         switch (itemData.itemType)
@@ -107,7 +118,7 @@ public class Item : MonoBehaviour
                 else if(level > 5)
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.baseRange;
+                    float nextRange = weapon.BaseRange;
 
                     nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
                     nextRange = weapon.range * (1 + (itemData.upgradeRange[level] / 10));
@@ -117,10 +128,10 @@ public class Item : MonoBehaviour
                 else
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.baseRange;
+                    float nextRange = weapon.BaseRange;
 
                     nextDamage = weapon.damage + itemData.upgradeDamages[level];
-                    nextRange = weapon.baseRange * (1 + itemData.upgradeRange[level]);
+                    nextRange = weapon.BaseRange * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
@@ -260,20 +271,20 @@ public class Item : MonoBehaviour
                 else if (level > 5)
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.baseRange;
+                    float nextRange = weapon.BaseRange;
 
                     nextDamage = weapon.damage + (itemData.upgradeDamages[level] / 10);
-                    nextRange = weapon.baseRange * (1 + (itemData.upgradeRange[level] / 10));
+                    nextRange = weapon.BaseRange * (1 + (itemData.upgradeRange[level] / 10));
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
                 else
                 {
                     float nextDamage = weapon.damage;
-                    float nextRange = weapon.baseRange;
+                    float nextRange = weapon.BaseRange;
 
                     nextDamage = weapon.damage + itemData.upgradeDamages[level];
-                    nextRange = weapon.baseRange * (1 + itemData.upgradeRange[level]);
+                    nextRange = weapon.BaseRange * (1 + itemData.upgradeRange[level]);
 
                     weapon.LevelUp(nextDamage, nextRange);
                 }
@@ -311,17 +322,14 @@ public class Item : MonoBehaviour
                 objCross.text = "Lv" + (level + 1);
                 break;
             case ItemData.ItemType.Heal:
-                GameManager.instance.hp = GameManager.instance.maxHp;
+                GameManager.instance.hp = GameManager.instance.MaxHp;
                 break;
 
 
         }
 
         level++;
-        AudioManager.instance.PlayerSfx(AudioManager.Sfx.Select);
-        //if (level == itemData.upgradeRange.Length)
-        //{
-        //    GetComponent<Button>().interactable = false;
-        //}
+        AudioManager.instance.PlaySfx(AudioManager.Sfx.Select);
+        
     }
 }
